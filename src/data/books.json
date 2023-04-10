@@ -1,0 +1,30 @@
+[
+  {
+    "_id": 123,
+    "kind": "books#volume",
+    "volumeInfo": {
+      "title": "The Google Story (2018 Updated Edition)",
+      "subtitle": "Inside the Hottest Business, Media, and Technology Success of Our Time",
+      "authors": ["David A. Vise", "Mark Malseed"],
+      "publisher": "Random House Publishing Group",
+      "publishedDate": "2005-11-15",
+      "description": "\u003cb\u003e \u003cb\u003eThe definitive, bestselling account of the company that changed the way we work and live, updated for the twentieth anniversary of Google’s founding with analysis of its most recent bold moves to redefine the world—and its even more ambitious plans for the future.\u003c/b\u003e\u003cbr\u003e\u003c/b\u003e\u003cbr\u003eMoscow-born Sergey Brin and Midwest-born Larry Page dropped out of graduate school at Stanford University to, as they said, “change the world” through a powerful search engine that would organize every bit of information on the Web for free. \u003ci\u003eThe Google Story\u003c/i\u003e takes you deep inside the company’s wild ride from an idea that struggled for funding in 1998 to a firm that today rakes in billions in profits. Based on scrupulous research and extraordinary access to Google, this fast-moving narrative reveals how an unorthodox management style and a culture of innovation enabled a search-engine giant to shake up Madison Avenue, clash with governments that accuse it of being a monopoly, deploy self-driving cars to forever change how we travel, and launch high-flying Internet balloons. Unafraid of controversy, Google is surging ahead with artificial intelligence that could cure diseases but also displace millions of people from their jobs, testing the founders’ guiding mantra: DON’T BE EVIL.\u003cbr\u003e\u003cb\u003e\u003cbr\u003ePraise for \u003ci\u003eThe Google Story\u003cbr\u003e\u003c/i\u003e\u003c/b\u003e\u003ci\u003e\u003cbr\u003e\u003c/i\u003e“[The authors] do a fine job of recounting Google’s rapid rise and explaining its search business.”\u003cb\u003e—\u003ci\u003eThe New York Times\u003cbr\u003e\u003c/i\u003e\u003c/b\u003e\u003cbr\u003e“An intriguing insider view of the Google culture.”\u003cb\u003e—\u003ci\u003eHarvard Business Review\u003cbr\u003e\u003c/i\u003e\u003c/b\u003e\u003cbr\u003e“An interesting read on a powerhouse company . . . If you haven’t read anything about one of today’s most influential companies, you should. If you don’t read \u003ci\u003eThe Google Story,\u003c/i\u003e you’re missing a few extra treats.”\u003cb\u003e—\u003ci\u003eUSA Today\u003cbr\u003e\u003c/i\u003e\u003c/b\u003e\u003cbr\u003e“Fascinating . . . meticulous . . . never bogs down.”\u003cb\u003e—\u003ci\u003eHouston Chronicle\u003c/i\u003e\u003c/b\u003e",
+      "pageCount": 384,
+      "catagories": [
+        "Business & Economics / Entrepreneurship",
+        "Computers / Information Technology",
+        "History / Modern / 20th Century / General"
+      ],
+      "averageRating": 3.5,
+      "ratingsCount": 20,
+      "imageLinks": {
+        "smallThumbnail": "http://books.google.com/books/content?id=zyTCAlFPjgYC&printsec=frontcover&img=1&zoom=5&edge=curl&imgtk=AFLRE73YcvXCS1vXrEaKWnZMM-KsNun2NRPISr5ckCFVUY3FWRaY24A1IcvOWOnGobytxAgr-bU6cuakQNfYNOyfZH82PxEsJ66K3sdd8S80F2tZ7bxKKdpceseFp-hC6niz3A-6-lvw&source=gbs_api",
+        "thumbnail": "http://books.google.com/books/content?id=zyTCAlFPjgYC&printsec=frontcover&img=1&zoom=1&edge=curl&imgtk=AFLRE73nnzuJ-gPR0gx-bo95XZwXSCDsp4Ywom_mRxHjVRRLHcuaDWFKY8UTM88qBpSo3wpvLy0-OVvtfEax6X3OZQZQBVUgi67A8wOiBuba4ODbSBzNCBDcIE5TXAD7kS73UkTFOSeP&source=gbs_api",
+        "small": "http://books.google.com/books/content?id=zyTCAlFPjgYC&printsec=frontcover&img=1&zoom=2&edge=curl&imgtk=AFLRE70Vo-9Cky1RoTXi0Pq3kjoLqoMAuN8SpC739rbit9ZJ7isg4LJCW6iJ79zirK7qNR26p_iMH0CQ6zVwGUlBybPoMEiVOWu_KUFZtg6_IDjtyp19Ocbs3sVt6l37e7lAaQ7DRk3r&source=gbs_api",
+        "medium": "http://books.google.com/books/content?id=zyTCAlFPjgYC&printsec=frontcover&img=1&zoom=3&edge=curl&imgtk=AFLRE7250OdYebO6ZEEa1_fZ7x3eoCIl-3_5MdTeIH1kkJvfxtRnApTT2GqVqDKNcgtbRk2G7ctsR_FkzzVNzczZ_rtaR6Vb2MJ-BGoDAco_eiTUIKklFpXwWe24oNFm9ywzFpxjBA9T&source=gbs_api",
+        "large": "http://books.google.com/books/content?id=zyTCAlFPjgYC&printsec=frontcover&img=1&zoom=4&edge=curl&imgtk=AFLRE70LCX_uTkDoBSrH_E_Qd26Q2swepEhBIKfeqfAXioNZzotk7JJx1swnofUno90uz3yxLkJUavHsoMu2O3WHDZr4piRcIYQTiVnkhrMbg3_nv4hW5ZSheO_afzg_xsUd_TbEp8qA&source=gbs_api"
+      },
+      "infoLink": "https://play.google.com/store/books/details?id=zyTCAlFPjgYC&source=gbs_api"
+    }
+  }
+]
