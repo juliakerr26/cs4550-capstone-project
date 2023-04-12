@@ -1,6 +1,4 @@
 import axios from 'axios';
-// const API_KEY = process.env.REACT_APP_GOOGLE_BOOKS_API_KEY;
-const API_KEY = "AIzaSyCaF6m7nfw6e0d-BnuQhPTUGYLSpD07-vo"
 //const BOOKS_API = process.env.REACT_APP_GOOGLE_BOOKS_API;
 const BOOKS_API = "https://www.googleapis.com/books/v1/volumes";
 

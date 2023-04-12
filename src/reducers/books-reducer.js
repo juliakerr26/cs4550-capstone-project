@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getBookByIdThunk, getBooksBySearchThunk } from '../services/books_thunks';
+import { getBookByIdThunk, getBooksBySearchThunk } from '../services/books-thunks';
 
 const initialState = {
   books: [],
