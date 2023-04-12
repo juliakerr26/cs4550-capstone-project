@@ -20,6 +20,7 @@ const BookDetails = () => {
 
   return (
     <div className="row pt-5 pb-5 bg-light-green">
+      {console.log(book)}
       <div className="col-4 text-center">
         <div className="bg-medium-green rounded">
           <img src={testBook.imageLinks.medium} className="img-fluid p-3" />
@@ -36,14 +37,14 @@ const BookDetails = () => {
         </div>
         <div className="txt-dark-green pt-4">
           <h5>
-            {testBook.averageRating} <i class="fa fa-regular fa-star fa-sm"></i>
+            {testBook.averageRating} <i className="fa fa-regular fa-star fa-sm"></i>
           </h5>
           <h5>{testBook.ratingsCount} Reviews</h5>
         </div>
       </div>
       <div className="col-8 txt-dark-green">
         <div>
-        <i class="fa fa-solid fa-heart fa-lg float-end p-3" style={{color: "#ff2600"}}></i>
+        <i className="fa fa-solid fa-heart fa-lg float-end p-3" style={{color: "#ff2600"}}></i>
         <h1>{testBook.title}</h1>
         </div>
         <h3>{testBook.subtitle}</h3>
