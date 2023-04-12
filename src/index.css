@@ -1,13 +1,54 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.bg-dark-green {
+  background-color: rgb(38, 70, 83);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.bg-medium-green {
+  background-color: rgb(42, 157, 143);
+}
+
+.bg-light-green {
+  background-color: rgb(215, 242, 186);
+}
+
+.bg-light-orange {
+  background-color: rgb(244, 162, 97);
+}
+
+.bg-dark-orange {
+  background-color: rgb(231, 111, 81);
+}
+
+.txt-dark-green {
+  color: rgb(38, 70, 83);
+}
+
+.txt-gray-green {
+  color: rgb(98, 128, 141);
+}
+
+.txt-medium-green {
+  color: rgb(42, 157, 143);
+}
+
+.txt-light-green {
+  color: rgb(215, 242, 186);
+}
+
+.txt-light-orange {
+  color: rgb(244, 162, 97);
+}
+
+.txt-dark-orange {
+  color: rgb(231, 111, 81);
+}
+
+.btn {
+  background-color: rgb(244, 162, 97);
+  color: white;
+}
+
+.btn:hover {
+  background-color: rgb(231, 111, 81);
+  color: white;
+  border-color: rgb(231, 111, 81);
 }
