@@ -65,8 +65,7 @@ const BookDetails = () => {
           </div>
         </div>
 
-        <h6>Description:</h6>
-        {testBook.description}
+        <div dangerouslySetInnerHTML={{__html: testBook.description}}/>
       </div>
     </div>
   );

@@ -1,32 +1,37 @@
-import Search from './search';
 import Home from './home';
-import BookClub from './main';
+import Search from './search';
+import BookDetails from './shared/book-details.js';
 import Profile from './profile';
 import Login from './login';
+import NavBar from './shared/nav-bar';
+import usersReducer from './reducers/users-reducer.js';
+import booksReducer from './reducers/books-reducer.js';
+import bookClubReducer from './reducers/book-club-reducer.js';
 import { BrowserRouter, Link } from 'react-router-dom';
 import { Routes, Route } from 'react-router';
-import BookDetails from './shared/book-details.js';
+import { configureStore } from '@reduxjs/toolkit';
+import { Provider } from 'react-redux';
+import CurrentUserContext from './redux/current-user-context';
+import store from './redux/store'
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="container">
-        <Link to="/">Main Page</Link> |
-        <Link to="home">Home</Link> |
-        <Link to="search">Search</Link> |
-        <Link to="book-details/zyTCAlFPjgYC">Book Details</Link> |
-        <Link to="profile">Profile</Link> |
-        <Link to="login">Login</Link>
-        <Routes>
-          <Route path="/" element={<BookClub />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/search" element={<Search />} />
-          <Route path="/book-details/:id" element={<BookDetails />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <Provider store={store}>
+      <CurrentUserContext>
+        <BrowserRouter>
+          <div className="container">
+            <NavBar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/book-details/:id" element={<BookDetails />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/login" element={<Login />} />
+            </Routes>
+          </div>
+        </BrowserRouter>
+      </CurrentUserContext>
+    </Provider>
   );
 }
 
