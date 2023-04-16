@@ -19,10 +19,10 @@ const BookDetails = () => {
   }, []);
 
   return (
-    <div className="row pt-5 pb-5 bg-light-green">
+    <div className="row pt-5 pb-5">
       {console.log(book)}
       <div className="col-4 text-center">
-        <div className="bg-medium-green rounded">
+        <div className="bg-light-green rounded">
           <img src={testBook.imageLinks.medium} className="img-fluid p-3" />
         </div>
         <div className="d-none d-lg-block">
