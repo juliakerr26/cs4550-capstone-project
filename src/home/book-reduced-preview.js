@@ -2,7 +2,7 @@ const BookReducedPreview = (bookParam) => {
     const book = bookParam.bookParam;
     const bookInfo = book.volumeInfo;
     return (
-        <li className="list-group-item">
+        <li className="list-group-item bg-light-orange p-2">
             <div className="row">
                 <div className="col-2">
                     <img className="img-fluid" src={bookInfo.imageLinks.smallThumbnail} alt="book image preview"></img>
@@ -12,7 +12,7 @@ const BookReducedPreview = (bookParam) => {
                     <p>{bookInfo.authors}</p>
                 </div>
                 <div>
-                    <i className="bi bi-heart"></i>
+                    <i className="fa fa-bookmark"></i>
                 </div>
             </div>
         </li>

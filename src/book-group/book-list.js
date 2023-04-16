@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getBookById } from '../services/books-service';
+import { getBookByIdThunk} from '../services/books-thunks';
 
 const BookList = (
   bookClub = {
@@ -12,7 +13,7 @@ const BookList = (
   const fetchBooks = async () => {
     const booksSoFar = books;
     for (bookId in bookClubs.bookList) {
-      const bookObject = await getBookById(bookId);
+      const bookObject = await getBookByIdThunk(bookId);
       booksSoFar.push(bookObject.volumeInfo);
     }
     setBooks(booksSoFar);
