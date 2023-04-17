@@ -12,7 +12,7 @@ const BookList = (
   const [books, setBooks] = useState([]);
   const fetchBooks = async () => {
     const booksSoFar = books;
-    for (bookId in bookClubs.bookList) {
+    for (bookId in bookClub.bookList) {
       const bookObject = await getBookByIdThunk(bookId);
       booksSoFar.push(bookObject.volumeInfo);
     }

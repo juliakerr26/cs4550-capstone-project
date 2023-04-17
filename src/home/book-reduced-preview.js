@@ -7,7 +7,7 @@ const BookReducedPreview = (bookParam) => {
                 <div className="col-2">
                     <img className="img-fluid" src={bookInfo.imageLinks.smallThumbnail} alt="book image preview"></img>
                 </div>
-                <div>
+                <div className="fs-7 fw-light">
                     <p>{bookInfo.title}</p>
                     <p>{bookInfo.authors}</p>
                 </div>
