@@ -5,7 +5,7 @@ import bookClubReducer from '../reducers/book-club-reducer';
 
 const store = configureStore({
   reducer: {
-    booksData: booksReducer,
+    books: booksReducer,
     bookClubs: bookClubReducer,
     users: usersReducer,
   },
