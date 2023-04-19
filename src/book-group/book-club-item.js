@@ -25,7 +25,7 @@ const BookClubItem = (
     <li className="list-group-item bg-light-green m-1 p-2">
       <div className="row">
         <div className="col-10">
-          <img width={70} className="float-start rounded-circle" src={`/images/book-stack.jpg`} />
+          <img width={70} className="float-start rounded me-2" src={`/images/book-stack.jpg`} />
           <div>
             <LinkContainer to={`/book-clubs/${club._id}`}>
               <div className="fw-bolder txt-dark-orange">{club.name}</div>
