@@ -11,7 +11,6 @@ const BookList = () => {
   const { id } = useParams();
   const { bookClubs, loading } = useSelector(state => state.bookClubs);
   const dispatch = useDispatch();
-  console.log(testBookClubs[0].bookList);
 
   useEffect(() => {
     dispatch(findBookClubByIdThunk(id));

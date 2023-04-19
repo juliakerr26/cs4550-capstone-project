@@ -3,8 +3,7 @@ import { useDispatch } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { deleteBookClubThunk } from '../services/book-club-thunk';
 
-const BookClubItem = (
-  {
+const BookClubItem = ({
     club = {
       _id: 123,
       name: 'Book Club Name',
@@ -12,14 +11,12 @@ const BookClubItem = (
       members: [],
       bookList: [],
     },
-  },
-  isAdmin = true
-) => {
+    isAdmin = true
+  }) => {
   const dispatch = useDispatch();
   const deleteClubHandler = id => {
     dispatch(deleteBookClubThunk(id));
   };
-  console.log(isAdmin);
 
   return (
     <li className="list-group-item bg-light-green m-1 p-2">

@@ -8,8 +8,7 @@ const BookListItem = ({ bookClub, book_id }) => {
   const { currentUser } = useSelector(state => state.users);
   const [book, setBook] = useState({});
   const dispatch = useDispatch();
-  //const isAdmin = currentUser && currentUser.isAdmin;
-  const isAdmin = true;
+  const isAdmin = !!currentUser && currentUser.isAdmin;
 
   const fetchBook = async () => {
     const bookObject = await getBookById(book_id);
