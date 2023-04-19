@@ -1,7 +1,7 @@
-const BookPreview = (bookParam) => {
-    const book = bookParam.bookParam;
-    console.log("current book in book preview");
-    console.log(book)
+const BookPreview = ({ book }) => {
+    // const book = bookParam.bookParam;
+    // console.log("current book in book preview");
+    // console.log(book)
     const bookInfo = book.volumeInfo;
     return (
         <li className="list-group-item bg-light-green lh-2 p-2">

@@ -1,5 +1,5 @@
-const BookReducedPreview = (bookParam) => {
-    const book = bookParam.bookParam;
+const BookReducedPreview = ({book}) => {
+    // const book = bookParam.bookParam;
     const bookInfo = book.volumeInfo;
     return (
         <li className="list-group-item bg-light-orange p-2">

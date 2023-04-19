@@ -21,10 +21,10 @@ const Home = () => {
                 {/*  // <p>{b.volumeInfo}</p>*/}
                 {/*  <BookPreview key={b._id} book1={b} />*/}
                 {/*))}*/}
-                <BookList bookParam={books}/>
+                <BookList books={books}/>
             </div>
             <div className="col-3">
-                <BookSidebar bookParam={books}/>
+                <BookSidebar books={books}/>
             </div>
 
 

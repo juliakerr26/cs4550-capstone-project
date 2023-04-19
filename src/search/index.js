@@ -41,7 +41,7 @@ const Search = () => {
             <div>
                 {
                     results.map((result) => (
-                        <BookPreview bookParam={result}/>
+                        <BookPreview book={result}/>
                     ))
                 }
             {/*    here render the results we have so far, if any. if we don't have any
