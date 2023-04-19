@@ -11,14 +11,17 @@ const Search = () => {
     const [results, setResults] = useState(books);
     // const [results, setResults] = useState([]);
     const searchForBooks = async () => {
+        console.log("these are the results")
         console.log(results);
         const searchResults = await service.getBooksBySearchThunk(queryTerm);
+        console.log("these are the searchr esults")
+        console.log(searchResults);
         setResults(searchResults);
-        // i forgot what to send this to
-        navigate();
+        // does not work!
+        // navigate(`?q=${queryTerm}`);
     }
     useEffect(() => {
-       if (query){
+       if (query) {
            setQuery(query);
            searchForBooks();
        }
@@ -28,7 +31,7 @@ const Search = () => {
             <div className="input-group p-2">
                 <div className="col-8 align-self-center position-relative">
                     <input type="search" id="search-bar" className="form-control"
-                           placeholder="Search" value={query} onChange={(event) => setQuery(event.target.value)}/>
+                           placeholder="Search" value={queryTerm} onChange={(event) => setQuery(event.target.value)}/>
                 </div>
                 {/* onclick return search results*/}
                 <button type="button" className="btn bg-dark-green p-2" onClick={searchForBooks}>
@@ -44,6 +47,7 @@ const Search = () => {
             {/*    here render the results we have so far, if any. if we don't have any
             bc we're waiting or whatever, show a loading screen. if results is empty, show no results*/}
             </div>
+            {/*<pre>{JSON.stringify(results, null, 2)}</pre>*/}
         </>
     )
 }
