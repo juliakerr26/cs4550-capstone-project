@@ -25,7 +25,7 @@ const BookGroup = () => {
 
   return (
     <div>
-      <h3 className="d-inline-block txt-dark-orange ps-3 pt-3">Book Clubs</h3>
+      <h3 className="d-inline-block txt-dark-orange ps-2 pt-3">Book Clubs</h3>
       <LinkContainer to={`/book-clubs/create`}>
         <a className="d-inline-block btn rounded-pill align-middle float-end ms-3 mt-3">Create Book Club</a>
       </LinkContainer>
@@ -33,9 +33,9 @@ const BookGroup = () => {
         {loading && <li className="list-group-item">Loading...</li>}
         {!clubsToRender.length ? (
           isAdmin ? (
-            <h5 className="txt-dark-green ps-3 pt-3">You have not created any Book Clubs!</h5>
+            <h5 className="txt-dark-green ps-2 pt-3">You have not created any Book Clubs!</h5>
           ) : (
-            <h5 className="txt-dark-green ps-3 pt-3">You are not a member of any Book Clubs!</h5>
+            <h5 className="txt-dark-green ps-2 pt-3">You are not a member of any Book Clubs!</h5>
           )
         ) : (
           clubsToRender.map(club => <BookClubItem key={club._id} {...{ club: club, isAdmin: isAdmin }} />)
