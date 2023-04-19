@@ -18,7 +18,8 @@ const BookList = () => {
 
   return (
     <div>
-      <h3 className="txt-dark-orange ps-3 pt-3">Reading List</h3>
+      <h3 className="txt-dark-orange ps-2 pt-3 d-inline-block">{testBookClubs[0].name}</h3>
+      <h3 className="txt-dark-orange ps-2 pt-3 d-inline-block">Reading List</h3>
       <ul className="list-group">
         {loading && <li className="list-group-item">Loading...</li>}
         {testBookClubs[0].bookList.map(book_id => (

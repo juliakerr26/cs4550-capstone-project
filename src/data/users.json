@@ -1,5 +1,6 @@
 [
   {
+    "_id": "6436dd3d62713ff5c9e4e28c",
     "username": "julia",
     "password": "password1",
     "firstName": "Julia",
@@ -10,6 +11,7 @@
     ]
   },
   {
+    "_id": "6436dde062713ff5c9e4e28d",
     "username": "gavin",
     "password": "password2",
     "firstName": "Gavin",

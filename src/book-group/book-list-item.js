@@ -32,7 +32,7 @@ const BookListItem = ({ bookClub, book_id }) => {
       {book.id && (
         <div className="row">
           <div className="col-2">
-            <img className="img-fluid" src={book.volumeInfo.imageLinks.medium}></img>
+            <img className="img-fluid" src={book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.medium}></img>
           </div>
           <div className="col-8">
             <LinkContainer to={`/book-details/${book_id}`}>
