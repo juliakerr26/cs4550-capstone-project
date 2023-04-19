@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import * as service from "../services/books-thunks";
+import * as service from "../services/books-service"
 import {useParams, useNavigate} from "react-router-dom";
 import BookPreview from "../shared/book-preview";
 import books from "../data/books.json"
@@ -13,19 +13,19 @@ const Search = () => {
     const searchForBooks = async () => {
         console.log("these are the results")
         console.log(results);
-        const searchResults = await service.getBooksBySearchThunk(queryTerm);
+        const searchResults = await service.getBooksBySearch(queryTerm); // await service.getBooksBySearchThunk(queryTerm);
         console.log("these are the searchr esults")
         console.log(searchResults);
         setResults(searchResults);
         // does not work!
-        // navigate(`?q=${queryTerm}`);
+        // navigate(`/search`);
     }
     useEffect(() => {
        if (query) {
            setQuery(query);
            searchForBooks();
        }
-    }, [queryTerm]);
+    }); // , [queryTerm] // for dependencies
     return (
         <>
             <div className="input-group p-2">
@@ -33,23 +33,23 @@ const Search = () => {
                     <input type="search" id="search-bar" className="form-control"
                            placeholder="Search" value={queryTerm} onChange={(event) => setQuery(event.target.value)}/>
                 </div>
-                {/* onclick return search results*/}
                 <button type="button" className="btn bg-dark-green p-2" onClick={searchForBooks}>
                     <i className="fas fa-search"></i>
                 </button>
             </div>
             <div>
                 {
-                    results.map((result) => (
+                    (results.items && (
+                    results.items.map(result =>
                         <BookPreview book={result}/>
-                    ))
+                    )))
+                    ||
+                    <h2 className={"m-2"}>Search for Books</h2>
                 }
-            {/*    here render the results we have so far, if any. if we don't have any
-            bc we're waiting or whatever, show a loading screen. if results is empty, show no results*/}
             </div>
             {/*<pre>{JSON.stringify(results, null, 2)}</pre>*/}
         </>
-    )
+    );
 }
 
 export default Search;

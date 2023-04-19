@@ -41,7 +41,7 @@ const BookDetails = () => {
       {book.id && (<div className="row pt-5 pb-5">
         <div className="col-4 text-center">
           <div className="bg-light-green rounded">
-            <img src={book.volumeInfo.imageLinks.medium} className="img-fluid p-3" />
+            <img src={book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.medium} className="img-fluid p-3" />
           </div>
           <div className="d-none d-lg-block">
             <a className="btn btn-lg rounded-pill align-middle mt-3" href={book.volumeInfo.infoLink}>
