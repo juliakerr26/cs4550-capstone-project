@@ -14,6 +14,12 @@ export const findBookClubs = async () => {
   return clubs;
 }
 
+export const findBookClubById = async (id) => {
+  const response = await axios.get(`${GROUPS_API}/${id}`);
+  const club = response.data;
+  return club;
+}
+
 export const updateBookClub = async club => {
   const response = await axios.put(`${GROUPS_API}/${club._id}`, club);
   return club;

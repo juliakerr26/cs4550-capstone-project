@@ -29,6 +29,9 @@ const NavBar = () => {
             <LinkContainer to="/book-details/zyTCAlFPjgYC">
               <NavLink className="nav-link">Book Details</NavLink>
             </LinkContainer>
+            <LinkContainer to="/book-clubs">
+              <NavLink className="nav-link">Book Clubs</NavLink>
+            </LinkContainer>
             <LinkContainer to="/profile">
               <NavLink className="nav-link">Profile</NavLink>
             </LinkContainer>

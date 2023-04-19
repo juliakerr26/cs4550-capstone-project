@@ -1,6 +1,8 @@
 import Home from './home';
 import Search from './search';
 import BookDetails from './shared/book-details.js';
+import BookGroup from './book-group';
+import BookList from './book-group/book-list.js'
 import Profile from './profile';
 import Login from './login';
 import NavBar from './shared/nav-bar';
@@ -25,6 +27,8 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/search" element={<Search />} />
               <Route path="/book-details/:id" element={<BookDetails />} />
+              <Route path="/book-clubs" element={<BookGroup/>} />
+              <Route path="/book-clubs/:id" element={<BookList/>} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/login" element={<Login />} />
             </Routes>

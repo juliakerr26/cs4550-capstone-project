@@ -1,25 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { findBookClubs } from '../services/book-club-service';
-import BookList from './book-list';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { findBookClubsThunk } from '../services/book-club-thunk';
+import BookClubItem from './book-club-item';
 import '../index.css';
 
+import TestingBookClub from '../data/book-clubs.json';
+
 const BookGroup = () => {
-  const { currentUser } = useSelector((state) => state.users);
-  const [bookClubs, setBookClubs] = useState([]);
-  const fetchBookClubs = async () => {
-    const result = await findBookClubs();
-    result.filter(bookClub => bookClub.users.includes(currentUser._id));
-    setBookClubs(result);
-  };
+  const { currentUser } = useSelector(state => state.users);
+  const { bookClubs, loading } = useSelector(state => state.bookClubs);
+  const dispatch = useDispatch();
   useEffect(() => {
-    fetchBookClubs()
+    dispatch(findBookClubsThunk());
   }, []);
+
+  const isAdmin = !!currentUser && currentUser.isAdmin;
 
   return (
     <div>
-      <b1>Book Group Tabs</b1>
-      <BookList/>
+      <h3 className="txt-dark-orange ps-3 pt-3">Book Clubs</h3>
+      <ul className="list-group">
+        {loading && <li className="list-group-item">Loading...</li>}
+        {isAdmin && TestingBookClub
+          //.filter(club => club.admin === currentUser._id)
+          .map(club => (
+            <BookClubItem key={club._id} club={club} isAdmin={isAdmin} />
+          ))}
+        {!isAdmin && TestingBookClub
+          //.filter(club => club.members.includes(currentUser._id))
+          .map(club => (
+            <BookClubItem key={club._id} club={club} isAdmin={isAdmin} />
+          ))}
+      </ul>
     </div>
   );
 };

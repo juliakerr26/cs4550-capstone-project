@@ -1,0 +1,20 @@
+[
+  {
+    "username": "julia",
+    "password": "password1",
+    "firstName": "Julia",
+    "lastName": "Kerr",
+    "isAdmin": true,
+    "bookList": [
+      "zyTCAlFPjgYC"
+    ]
+  },
+  {
+    "username": "gavin",
+    "password": "password2",
+    "firstName": "Gavin",
+    "lastName": "White",
+    "isAdmin": false,
+    "bookList": []
+  }
+]
