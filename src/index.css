@@ -1,5 +1,5 @@
 .bg-dark-green {
-  background-color: rgb(38, 70, 83);
+  background-color: rgb(38, 70, 83) !important;
 }
 
 .bg-medium-green {
