@@ -16,6 +16,7 @@ const BookGroup = () => {
   useEffect(() => {
     dispatch(findBookClubsThunk());
   }, []);
+  console.log(bookClubs);
 
   const isAdmin = !!currentUser && currentUser.isAdmin;
   const clubsToRender = [];
@@ -26,9 +27,11 @@ const BookGroup = () => {
   return (
     <div>
       <h3 className="d-inline-block txt-dark-orange ps-2 pt-3">Book Clubs</h3>
-      <LinkContainer to={`/book-clubs/create`}>
-        <a className="d-inline-block btn rounded-pill align-middle float-end ms-3 mt-3">Create Book Club</a>
-      </LinkContainer>
+      {isAdmin && (
+        <LinkContainer to={`/book-clubs/create`}>
+          <a className="d-inline-block btn rounded-pill align-middle float-end ms-3 mt-3">Create Book Club</a>
+        </LinkContainer>
+      )}
       <ul className="list-group">
         {loading && <li className="list-group-item">Loading...</li>}
         {!clubsToRender.length ? (
