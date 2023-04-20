@@ -15,15 +15,17 @@ const Home = () => {
     const getHomeBooks = async () => {
         console.log("getHomeBooks books")
         console.log(books)
-        const results = await service.getBooksBySearch("computers+subject");
+        const results = await service.getBooksBySearch("fantasy+subject");
         setBooks(results);
         console.log("getHomeBooks results")
         console.log(results)
     }
 
     const getSavedBooks = async () => {
+        // need a way to get all the id's of books that a user has liked
+        //
+        const saved = await service.getBookById("13");
         console.log("here is where we should try to tie in the user's saved books")
-
     }
 
     useEffect( () => {
@@ -36,14 +38,8 @@ const Home = () => {
     return (
         <div className="row">
             <h1>Home</h1>
-            {/* do we need a search bar across the entire website? or just this page? */}
-
             {/* left sidebar go here whatever it is*/}
             <div className="col-9">
-                {/*{books.map(b => (*/}
-                {/*  // <p>{b.volumeInfo}</p>*/}
-                {/*  <BookPreview key={b._id} book1={b} />*/}
-                {/*))}*/}
                 {
                     books.items && (
                     <BookList books={books.items}/>)

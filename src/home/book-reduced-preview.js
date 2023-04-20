@@ -1,3 +1,5 @@
+import {Link} from "react-router-dom";
+
 const BookReducedPreview = ({book}) => {
     // const book = bookParam.bookParam;
     const bookInfo = book.volumeInfo;
@@ -6,14 +8,14 @@ const BookReducedPreview = ({book}) => {
     return (
         <li className="list-group-item bg-light-orange p-2">
             <div className="row">
+                <div className="col-2 d-none d-lg-block">
+                    <img className="img-fluid" src={bookInfo.imageLinks && bookInfo.imageLinks.thumbnail} alt="book image preview"></img>
+                </div>
+                <div className="col-8 fs-7 fw-light" style={{fontSize: 12}}>
+                    {/*<p>{bookInfo.title}</p>*/}
+                    <Link to={`/book-details/${book.id}`}>{bookInfo.title}</Link>
+                </div>
                 <div className="col-2">
-                    <img className="img-fluid" src={bookInfo.imageLinks && bookInfo.imageLinks.smallThumbnail} alt="book image preview"></img>
-                </div>
-                <div className="fs-7 fw-light">
-                    <p>{bookInfo.title}</p>
-                    <p>{bookInfo.authors}</p>
-                </div>
-                <div>
                     <i className="fa fa-bookmark"></i>
                 </div>
             </div>
