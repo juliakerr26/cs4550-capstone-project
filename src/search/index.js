@@ -14,7 +14,7 @@ const Search = () => {
         console.log("these are the results")
         console.log(results);
         const searchResults = await service.getBooksBySearch(queryTerm); // await service.getBooksBySearchThunk(queryTerm);
-        console.log("these are the searchr esults")
+        console.log("these are the search results")
         console.log(searchResults);
         setResults(searchResults);
         // does not work!
