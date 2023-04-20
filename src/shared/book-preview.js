@@ -2,12 +2,12 @@ import {Link} from "react-router-dom";
 const BookPreview = ({ book }) => {
     // console.log("current book in book preview");
     // console.log(book)
-    console.log("in book preview, here's book param we got")
-    console.log(book)
+    console.log("in book preview, here's book param we got");
+    console.log(book);
     const bookInfo = book.volumeInfo;
     // console.log(bookInfo);
     return (
-        <li className="list-group-item bg-light-green lh-2 p-2 border-2 border-white">
+        <li className="list-group-item bg-light-green lh-2 p-2 border-2 border-white ">
             <div className="row">
                 <div className="col-2">
                     <img className="img-fluid" src={(bookInfo.imageLinks && bookInfo.imageLinks.smallThumbnail) || "./default-book-img.jpg"}
