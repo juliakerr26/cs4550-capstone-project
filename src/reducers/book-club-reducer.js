@@ -23,7 +23,6 @@ const bookClubsSlice = createSlice({
     },
     [findBookClubsThunk.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      console.log(payload)
       state.bookClubs = payload;
     },
     [findBookClubsThunk.rejected]: (state, action) => {

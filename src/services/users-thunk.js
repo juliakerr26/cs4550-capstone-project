@@ -10,17 +10,11 @@ export const registerThunk = createAsyncThunk(
   async (user, thunkAPI) => await userService.register(user)
 );
 
-export const profileThunk = createAsyncThunk('users/profile', async (user, thunkAPI) => {
-  return await userService.profile();
-});
+export const profileThunk = createAsyncThunk('users/profile', async (user, thunkAPI) => await userService.profile());
 
-export const findAllUsersThunk = createAsyncThunk('users/findAll', async () => {
-  await userService.findAllUsers();
-});
+export const findAllUsersThunk = createAsyncThunk('users/findAll', async () => await userService.findAllUsers());
 
-export const findUserByIdThunk = createAsyncThunk('users/findById', async id => {
-  await userService.findUserById(id);
-});
+export const findUserByIdThunk = createAsyncThunk('users/findById', async id => await userService.findUserById(id));
 
 export const findUserByUsernameThunk = createAsyncThunk(
   'users/findUserByUsername',
@@ -31,8 +25,9 @@ export const searchUserByUsernameThunk = createAsyncThunk('users/searchUserByUse
   userService.searchUserByUsername(search)
 );
 
-export const findUserByCredentialsThunk = createAsyncThunk('users/findByCredentials', async (username, password) => {
-  await userService.findUserByCredentials(username, password);
-});
+export const findUserByCredentialsThunk = createAsyncThunk(
+  'users/findByCredentials',
+  async (username, password) => await userService.findUserByCredentials(username, password)
+);
 
 export const updateUserThunk = createAsyncThunk('users/updateUser', async user => await userService.updateUser(user));

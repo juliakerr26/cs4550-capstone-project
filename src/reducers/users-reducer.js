@@ -9,6 +9,7 @@ import {
   registerThunk,
   logoutThunk,
 } from "../services/users-thunk";
+
 const initialState = {
   currentUser: null,
   returnedUsers: [],

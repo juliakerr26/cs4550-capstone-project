@@ -19,6 +19,9 @@ const CreateBookClub = () => {
   const [bookClubName, setBookClubName] = useState();
   const [bookClubMembers, setBookClubMembers] = useState([]);
   const [bookClubBookList, setBookClubBookList] = useState([]);
+  const [nameAlert, setNameAlert] = useState(false);
+  const [membersAlert, setMembersAlert] = useState(false);
+  const [bookListAlert, setBookListAlert] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -39,8 +42,11 @@ const CreateBookClub = () => {
         bookList: bookClubBookList.map(book => book.id),
       };
       dispatch(createBookClubThunk(newBookClub));
-      navigate("/book-clubs");
+      navigate('/book-clubs');
     } else {
+      setNameAlert(!bookClubName);
+      setMembersAlert(!bookClubMembers.length);
+      setBookListAlert(!bookClubBookList.length);
     }
   };
 
@@ -51,7 +57,7 @@ const CreateBookClub = () => {
     if (bookSearch) {
       searchForBooks();
     }
-  }, [bookClubMembers, bookClubBookList]);
+  }, [bookClubMembers, bookClubBookList, nameAlert, membersAlert, bookListAlert]);
 
   return (
     <div>
@@ -59,6 +65,21 @@ const CreateBookClub = () => {
       <button className="btn btn-lg rounded-pill float-end mt-1" onClick={() => createBookClub()}>
         Create
       </button>
+      {nameAlert && (
+        <div className="alert alert-danger" role="alert">
+          Please enter a name!
+        </div>
+      )}
+      {membersAlert && (
+        <div className="alert alert-danger" role="alert">
+          Please add members!
+        </div>
+      )}
+      {bookListAlert && (
+        <div className="alert alert-danger" role="alert">
+          Please add books to the reading list!
+        </div>
+      )}
       <div className="p-3 mb-3 border rounded">
         <h6 className="txt-dark-orange">Book Club Name:</h6>
         <input

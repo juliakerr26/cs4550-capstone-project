@@ -16,13 +16,12 @@ const BookGroup = () => {
   useEffect(() => {
     dispatch(findBookClubsThunk());
   }, []);
-  console.log(bookClubs);
 
   const isAdmin = !!currentUser && currentUser.isAdmin;
   const clubsToRender = [];
   isAdmin
-    ? clubsToRender.push(...TestingBookClub.filter(club => club.admin === currentUser._id))
-    : clubsToRender.push(...TestingBookClub.filter(club => club.members.includes(currentUser._id)));
+    ? clubsToRender.push(...bookClubs.filter(club => club.admin === currentUser._id))
+    : clubsToRender.push(...bookClubs.filter(club => club.members.includes(currentUser._id)));
 
   return (
     <div>
