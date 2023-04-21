@@ -4,7 +4,7 @@ const API_BASE = "https://cs4550-capstone-project-node.onrender.com/api";
 const USERS_API = `${API_BASE}/users`
 
 const api = axios.create({
-  withCredentials: true,
+  withCredentials: false,
 });
 
 export const createUser = async (user) => {
@@ -26,6 +26,11 @@ export const findUserByUsername = async (username) => {
   const response = await api.get(`${USERS_API}/username/${username}`);
   return response.data;
 };
+
+export const searchUserByUsername = async (search) => {
+  const response = await api.get(`${USERS_API}/username/search/${search}`);
+  return response.data;
+}
 
 export const findUserByCredentials = async (username, password) => {
   const response = await api.get(`${USERS_API}/${username}/${password}`);
