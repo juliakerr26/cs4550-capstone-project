@@ -16,6 +16,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import CurrentUserContext from './redux/current-user-context';
 import store from './redux/store'
+import SavedBooks from "./saved-books";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/search" element={<Search />} />
+              <Route path="/saved-books" element={<SavedBooks />} />
               <Route path="/book-details/:id" element={<BookDetails />} />
               <Route path="/book-clubs" element={<BookGroup/>} />
               <Route path="/book-clubs/create" element={<CreateBookClub/>} />

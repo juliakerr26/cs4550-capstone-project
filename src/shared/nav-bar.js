@@ -23,6 +23,9 @@ const NavBar = () => {
             <LinkContainer to="/">
               <NavLink className="nav-link active">Home</NavLink>
             </LinkContainer>
+            <LinkContainer to="/saved-books">
+              <NavLink className="nav-link">Saved Books</NavLink>
+            </LinkContainer>
             <LinkContainer to="/search">
               <NavLink className="nav-link">Search</NavLink>
             </LinkContainer>
