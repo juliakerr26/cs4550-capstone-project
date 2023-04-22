@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, componentWillMount, componendDidMount } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as service from '../services/books-service';
-import { searchUserByUsernameThunk } from '../services/users-thunk';
-import { createBookClubThunk } from '../services/book-club-thunk';
+import { searchUserByUsernameThunk, findUserByIdThunk } from '../services/users-thunk';
+import { createBookClubThunk, updateBookClubThunk, findBookClubByIdThunk } from '../services/book-club-thunk';
+import { getBookById } from '../services/books-service';
 
 import testUsers from '../data/users.json';
+import { findUserById } from '../services/users-service';
 
 const CreateBookClub = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   //const { currentUser } = useSelector(state => state.users);
   const currentUser = testUsers[0];
   const [usernameSearch, setUsernameSearch] = useState();
@@ -16,18 +21,21 @@ const CreateBookClub = () => {
   const [bookSearch, setBookSearch] = useState();
   const [bookResults, setbookResults] = useState([]);
 
+  const { id } = useParams();
+  const { bookClubs: existingClub } = useSelector(state => state.bookClubs);
+
   const [bookClubName, setBookClubName] = useState();
   const [bookClubMembers, setBookClubMembers] = useState([]);
   const [bookClubBookList, setBookClubBookList] = useState([]);
+
   const [nameAlert, setNameAlert] = useState(false);
   const [membersAlert, setMembersAlert] = useState(false);
   const [bookListAlert, setBookListAlert] = useState(false);
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const searchForUsernames = async () => {
     dispatch(searchUserByUsernameThunk(usernameSearch));
   };
+
   const searchForBooks = async () => {
     const searchResults = await service.getBooksBySearch(bookSearch);
     setbookResults(searchResults.items);
@@ -50,6 +58,23 @@ const CreateBookClub = () => {
     }
   };
 
+  const updateBookClub = () => {
+    if (!!bookClubName && !!bookClubMembers.length && !!bookClubBookList.length) {
+      const updatedBookClub = {
+        _id: existingClub._id,
+        name: bookClubName,
+        members: bookClubMembers.map(user => user._id),
+        bookList: bookClubBookList.map(book => book.id),
+      };
+      dispatch(updateBookClubThunk(updatedBookClub));
+      navigate('/book-clubs');
+    } else {
+      setNameAlert(!bookClubName);
+      setMembersAlert(!bookClubMembers.length);
+      setBookListAlert(!bookClubBookList.length);
+    }
+  };
+
   useEffect(() => {
     if (usernameSearch) {
       searchForUsernames();
@@ -59,12 +84,56 @@ const CreateBookClub = () => {
     }
   }, [bookClubMembers, bookClubBookList, nameAlert, membersAlert, bookListAlert]);
 
+  useEffect(() => {
+    if (id) {
+      dispatch(findBookClubByIdThunk(id));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (id && existingClub.name) {
+      setBookClubName(existingClub.name);
+
+      const memberObjects = [];
+      existingClub.members.map(id => {
+        fetchMembers(id, memberObjects);
+      })
+
+      const bookListObjects = [];
+      existingClub.bookList.map(id => {
+        fetchBook(id, bookListObjects)
+      })
+    }
+  }, [existingClub]);
+
+  const fetchBook = async (book_id, bookListObjects) => {
+    const returnedBook = await getBookById(book_id);
+    bookListObjects.push(returnedBook);
+    setBookClubBookList(bookListObjects);
+  };
+
+  const fetchMembers = async (user_id, memberObjects) => {
+    const returnedUser = await findUserById(user_id);
+    memberObjects.push(returnedUser);
+    setBookClubMembers(memberObjects);
+  };
+
   return (
     <div>
-      <h3 className="d-inline-block txt-dark-orange ps-2 pt-3">Create Book Club</h3>
-      <button className="btn btn-lg rounded-pill float-end mt-1" onClick={() => createBookClub()}>
-        Create
-      </button>
+      {id ? (
+        <h3 className="d-inline-block txt-dark-orange ps-2 pt-3">Update Book Club</h3>
+      ) : (
+        <h3 className="d-inline-block txt-dark-orange ps-2 pt-3">Create Book Club</h3>
+      )}
+      {id ? (
+        <button className="btn btn-lg rounded-pill float-end mt-1" onClick={() => updateBookClub()}>
+          Update
+        </button>
+      ) : (
+        <button className="btn btn-lg rounded-pill float-end mt-1" onClick={() => createBookClub()}>
+          Create
+        </button>
+      )}
       {nameAlert && (
         <div className="alert alert-danger" role="alert">
           Please enter a name!
@@ -108,7 +177,7 @@ const CreateBookClub = () => {
                 </button>
               </div>
             </li>
-            {!loading &&
+            {!loading && !!returnedUsers.length &&
               returnedUsers
                 .filter(
                   user => !bookClubMembers.some(member => member._id === user._id) && user._id !== currentUser._id
@@ -172,49 +241,50 @@ const CreateBookClub = () => {
                   </button>
                 </div>
               </li>
-              {bookResults
-                .filter(book => !bookClubBookList.some(bookInLst => bookInLst.id === book.id))
-                .map(book => {
-                  const bookInfo = book.volumeInfo;
-                  return (
-                    <li className="list-group-item lh-2 p-2 mb-1">
-                      <div className="row">
-                        <div className="col-2">
-                          <img
-                            className="img-fluid"
-                            src={
-                              (bookInfo.imageLinks && bookInfo.imageLinks.smallThumbnail) || './default-book-img.jpg'
-                            }
-                            alt="book preview image"
-                          ></img>
-                        </div>
-                        <div className="col-8">
-                          <div className="row fw-bold">{bookInfo.title}</div>
-                          <div className="row fw-light fst-italic">
-                            {bookInfo.authors} - {bookInfo.publisher}
+              {!loading &&
+                bookResults
+                  .filter(book => !bookClubBookList.some(bookInLst => bookInLst.id === book.id))
+                  .map(book => {
+                    const bookInfo = book.volumeInfo;
+                    return (
+                      <li className="list-group-item lh-2 p-2 mb-1">
+                        <div className="row">
+                          <div className="col-2">
+                            <img
+                              className="img-fluid"
+                              src={
+                                (bookInfo.imageLinks && bookInfo.imageLinks.smallThumbnail) || './default-book-img.jpg'
+                              }
+                              alt="book preview image"
+                            ></img>
                           </div>
-                          <div className="row">
-                            {bookInfo.description &&
-                              bookInfo.description
-                                .substring(0, 350)
-                                .replaceAll('<b>', '')
-                                .replaceAll('</b>', '')
-                                .replaceAll('<br>', ' ')}{' '}
-                            ...
+                          <div className="col-8">
+                            <div className="row fw-bold">{bookInfo.title}</div>
+                            <div className="row fw-light fst-italic">
+                              {bookInfo.authors} - {bookInfo.publisher}
+                            </div>
+                            <div className="row">
+                              {bookInfo.description &&
+                                bookInfo.description
+                                  .substring(0, 350)
+                                  .replaceAll('<b>', '')
+                                  .replaceAll('</b>', '')
+                                  .replaceAll('<br>', ' ')}{' '}
+                              ...
+                            </div>
+                          </div>
+                          <div className="col-2 align-self-center p-2">
+                            <button
+                              className="btn float-end rounded-pill justify-content-center"
+                              onClick={() => setBookClubBookList([...bookClubBookList, book])}
+                            >
+                              Add
+                            </button>
                           </div>
                         </div>
-                        <div className="col-2 align-self-center p-2">
-                          <button
-                            className="btn float-end rounded-pill justify-content-center"
-                            onClick={() => setBookClubBookList([...bookClubBookList, book])}
-                          >
-                            Add
-                          </button>
-                        </div>
-                      </div>
-                    </li>
-                  );
-                })}
+                      </li>
+                    );
+                  })}
             </ul>
           </div>
           <div className="col-6">

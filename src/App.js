@@ -7,12 +7,8 @@ import BookList from './book-group/book-list.js'
 import Profile from './profile';
 import Login from './login';
 import NavBar from './shared/nav-bar';
-import usersReducer from './reducers/users-reducer.js';
-import booksReducer from './reducers/books-reducer.js';
-import bookClubReducer from './reducers/book-club-reducer.js';
 import { BrowserRouter, Link } from 'react-router-dom';
 import { Routes, Route } from 'react-router';
-import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import CurrentUserContext from './redux/current-user-context';
 import store from './redux/store'
