@@ -21,4 +21,4 @@ const BookSidebar = ({ books }) => {
     )
 }
 
-export default BookSidebar
+export default BookSidebar;

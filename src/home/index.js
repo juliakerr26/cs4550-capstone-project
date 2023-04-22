@@ -19,7 +19,7 @@ const Home = () => {
     const getHomeBooks = async () => {
         // console.log("getHomeBooks books")
         // console.log(books)
-        const results = await service.getBooksBySearch("038534273X+isbn");
+        const results = await service.getBooksBySearch("fantasy+subject");
         setBooks(results);
         // console.log("getHomeBooks results")
         // console.log(results)

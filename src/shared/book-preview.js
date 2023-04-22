@@ -4,20 +4,21 @@ import {useDispatch, useSelector} from "react-redux";
 import * as userService from "../services/users-service"
 import {useEffect, useState} from "react";
 const BookPreview = ({ book }) => {
+    console.log("book id: " + book.id)
     let { currentUser } = useSelector(state => state.users);
     const dispatch = useDispatch();
-    console.log("current book in book preview");
-    console.log(book)
-    console.log("in book preview, here's book param we got");
-    console.log(book);
-    const [user, setUser] = useState(null);
+    // console.log("current book in book preview");
+    // console.log(book)
+    // console.log("in book preview, here's book param we got");
+    // console.log(book);
+    // const [user, setUser] = useState(null);
     const bookInfo = book.volumeInfo;
     const addBookmark = (book_id) => {
         console.log("here add to the user's bookList")
         dispatch(
             updateUserThunk({
-                                ...user,
-                                bookList: user.bookList.push(book_id)
+                                ...currentUser,
+                                bookList: currentUser.bookList.push(book_id)
                             }));
     };
 
@@ -31,11 +32,11 @@ const BookPreview = ({ book }) => {
     };
     const getUser = async () => {
         currentUser = await userService.findUserByUsername("julia");
-        setUser(currentUser)
-        console.log("user in prev");
-        console.log(currentUser);
+        // setUser(currentUser)
+        // console.log("user in prev");
+        // console.log(user);
         if (currentUser){
-            console.log("true prev");
+            console.log("true prev, this is currentUser");
             console.log(currentUser);
         }
         else {
@@ -56,12 +57,12 @@ const BookPreview = ({ book }) => {
         <li className="list-group-item bg-light-green lh-2 p-2 border-2 border-white rounded">
             <div className="row">
                 <div className="col-2">
-                    <img className="img-fluid" src={(bookInfo.imageLinks && bookInfo.imageLinks.smallThumbnail) || "./default-book-img.jpg"}
+                    <img className="img-fluid" style={{minWidth: 20}} src={(bookInfo.imageLinks && bookInfo.imageLinks.smallThumbnail) || "./default-book-img.jpg"}
                          alt="book preview image"></img>
                 </div>
                 <div className="col-9">
                     <div className="row fw-bold"><Link className="ps-0" to={`/book-details/${book.id}`}>{bookInfo.title}</Link></div>
-                    <div className="row fw-light fst-italic">{bookInfo.authors.join(", ")} - {bookInfo.publisher}</div>
+                    <div className="row fw-light fst-italic">{(bookInfo.authors && bookInfo.authors.join(", ")) || ("Anonymous Author")} - {bookInfo.publisher}</div>
                     <div className="row">{
                         bookInfo.description &&
                         bookInfo.description.substring(0,350)
@@ -73,22 +74,22 @@ const BookPreview = ({ book }) => {
                 <div className="col-1 align-self-center ps-2">
                     {/* TODO: add onclick functionality => save into Saved Books */}
                     {
-                        (user && (book.id in user.bookList) && (
+                        (currentUser && (book.id in currentUser.bookList) && (
                             <i className="fa fa-bookmark"
                             onClick={ removeBookmark(book.id) }></i>
                                     ))
                         ||
                         (
-                            user && !(book.id in user.bookList) && (
-                                <i className="fa-regular fa-bookmark"
+                            currentUser && !(book.id in currentUser.bookList) && (
+                                <i className="fa fa-heart"
                                 onClick={ addBookmark(book.id) }></i>
                                 ))
                         // (
                         //     console.log("hi " + user)
                         // )
-                        || (
-                            <h4>add a book</h4>
-                        )
+                        // || (
+                        //     <h6>weird</h6>
+                        // )
                     }
                 </div>
             </div>
