@@ -32,6 +32,7 @@ function App() {
               <Route path="/book-details/:id" element={<BookDetails />} />
               <Route path="/book-clubs" element={<BookGroup/>} />
               <Route path="/book-clubs/create" element={<CreateBookClub/>} />
+              <Route path="/book-clubs/edit/:id" element={<CreateBookClub/>} />
               <Route path="/book-clubs/update/:id" element={<BookGroup/>} />
               <Route path="/book-clubs/:id" element={<BookList/>} />
               <Route path="/profile" element={<Profile />} />
