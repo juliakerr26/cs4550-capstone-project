@@ -17,8 +17,6 @@ const Search = () => {
         console.log("these are the search results")
         console.log(searchResults);
         setResults(searchResults);
-        // does not work!
-        // navigate(`/search`);
     }
     useEffect(() => {
        if (query) {

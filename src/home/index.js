@@ -8,7 +8,7 @@ import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {updateUserThunk} from "../services/users-thunk";
 
-/* the books that are used as default here can be changed relatively easily */
+/* the books that are used as default here can be changed pretty easily */
 
 const Home = () => {
     console.log('in home');
@@ -17,18 +17,19 @@ const Home = () => {
     const [books, setBooks] = useState([]);
     const [savedBooks, setSavedBooks] = useState([]);
     const getHomeBooks = async () => {
-        console.log("getHomeBooks books")
-        console.log(books)
-        const results = await service.getBooksBySearch("fantasy+subject");
+        // console.log("getHomeBooks books")
+        // console.log(books)
+        const results = await service.getBooksBySearch("038534273X+isbn");
         setBooks(results);
-        console.log("getHomeBooks results")
-        console.log(results)
+        // console.log("getHomeBooks results")
+        // console.log(results)
     }
 
     const getSavedBooks = async () => {
-        // currentUser = userService.findUserById("6436dd3d62713ff5c9e4e28c");
+        // dummy user for now, just to see if it would render. it should work for the logged in user
+        currentUser = await userService.findUserById("6436dd3d62713ff5c9e4e28c");
         // currentUser = await userThunk.findUserByUsernameThunk("julia");
-        currentUser = await userService.findUserByUsername("julia");
+        // currentUser = await userService.findUserByUsername("julia");
         console.log("this is current user");
         console.log(currentUser);
         // need a way to get all the id's of books that a user has liked
@@ -39,7 +40,7 @@ const Home = () => {
             let savedBook = null;
             let saved = [];
             for (let i = 0; i < savedBooksIDs.length; i += 1) {
-                savedBook = await service.getBookById(savedBooksIDs[i]._id);
+                savedBook = await service.getBookById(savedBooksIDs[i]);
                 console.log("saved book we got")
                 console.log(savedBook);
                 saved.push(savedBook)
@@ -54,24 +55,6 @@ const Home = () => {
             setSavedBooks([]);
         }
     }
-
-    const addBookmark = (book_id) => {
-        console.log("here add to the user's bookList")
-        dispatch(
-            updateUserThunk({
-                ...currentUser,
-                bookList: currentUser.bookList.push(book_id)
-            }));
-    };
-
-    const removeBookmark = (book_id) => {
-        console.log("removing book from user's booklist")
-        dispatch(
-            updateUserThunk({
-                ...currentUser,
-                bookList: currentUser.bookList.filter((id) => id !== book_id)
-            }));
-    };
 
     useEffect( () => {
         if (books) {
@@ -98,8 +81,7 @@ const Home = () => {
             <div className="col-3">
                 {
                     savedBooks && (
-                //         might or might not have to change this back to savedBooks.items
-                <BookSidebar books={savedBooks}/>)
+                        <BookSidebar books={savedBooks}/>)
                 }
             </div>
         </div>

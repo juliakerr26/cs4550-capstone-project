@@ -7,7 +7,7 @@ const BookList = ({ books }) => {
     // console.log(books)
     return (
         <ul className="list-group">
-            <li className="list-group-item bg-light-green p-2 border-white">
+            <li className="list-group-item bg-light-green p-2 border-white rounded">
                 <h4>Recommended Books</h4>
             </li>
             {books.map((b) => (
