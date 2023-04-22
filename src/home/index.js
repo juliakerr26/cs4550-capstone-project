@@ -87,7 +87,7 @@ const Home = () => {
 
     return (
         <div className="row mb-2">
-            <h1>Home</h1>
+            <h3 className="d-inline-block txt-dark-orange ps-3 pt-3">Home</h3>
             {/* left sidebar go here whatever it is*/}
             <div className="col-9">
                 {

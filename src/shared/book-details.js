@@ -38,7 +38,8 @@ const BookDetails = () => {
 
   return (
     <div>
-      {book.id && (<div className="row pt-5 pb-5">
+      <h3 className="d-inline-block txt-dark-orange ps-2 pt-3">Book Details</h3>
+      {book.id && (<div className="row pb-5">
         <div className="col-4 text-center">
           <div className="bg-light-green rounded">
             <img src={book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.medium} className="img-fluid p-3" />

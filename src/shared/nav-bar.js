@@ -6,7 +6,7 @@ const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: '#bad1a1' }}>
       <div className="container-fluid">
-        <a className="navbar-brand">Navbar</a>
+        <a className="navbar-brand">Bookish</a>
         <button
           className="navbar-toggler"
           type="button"

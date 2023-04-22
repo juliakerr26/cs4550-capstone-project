@@ -28,12 +28,13 @@ const Search = () => {
     }); // , [queryTerm] // for dependencies
     return (
         <>
+        <h3 className="d-inline-block txt-dark-orange ps-2 pt-3">Search for Books</h3>
             <div className="input-group p-2">
                 <div className="col-8 align-self-center position-relative">
                     <input type="search" id="search-bar" className="form-control"
                            placeholder="Search" value={queryTerm} onChange={(event) => setQuery(event.target.value)}/>
                 </div>
-                <button type="button" className="btn bg-dark-green p-2" onClick={searchForBooks}>
+                <button type="button" className="btn p-2" onClick={searchForBooks}>
                     <i className="fas fa-search"></i>
                 </button>
             </div>
@@ -44,7 +45,7 @@ const Search = () => {
                         <BookPreview book={result}/>
                     )))
                     ||
-                    <h2 className={"m-2"}>Search for Books</h2>
+                    <h5 className={"m-2 fw-light fst-italic txt-dark-green"}>Enter a search to view books!</h5>
                 }
             </div>
             {/*<pre>{JSON.stringify(results, null, 2)}</pre>*/}
