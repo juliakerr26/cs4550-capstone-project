@@ -54,7 +54,7 @@ const BookPreview = ({ book }) => {
         }
     }, []);
     return (
-        <li className="list-group-item bg-light-green lh-2 p-2 border-2 border-white rounded">
+        <li className="list-group-item bg-light-green rounded p-2 mb-1">
             <div className="row">
                 <div className="col-2">
                     <img className="img-fluid" style={{minWidth: 20}} src={(bookInfo.imageLinks && bookInfo.imageLinks.smallThumbnail) || "./default-book-img.jpg"}
