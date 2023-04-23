@@ -11,10 +11,10 @@ import { BrowserRouter, Link } from 'react-router-dom';
 import { Routes, Route } from 'react-router';
 import { Provider } from 'react-redux';
 import CurrentUserContext from './redux/current-user-context';
-import CreateProfile from "./create-profile";
 import store from './redux/store';
 import SavedBooks from './saved-books';
 import UsersSearch from './search/users-search';
+import Register from "./create-profile";
 
 function App() {
   return (
@@ -37,8 +37,9 @@ function App() {
               <Route path="/book-clubs/update/:id" element={<BookGroup />} />
               <Route path="/book-clubs/:id" element={<BookList />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/profile/:username" element={<Profile />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/create-profile" element={<CreateProfile />} />
+              <Route path="/create-profile" element={<Register />} />
             </Routes>
           </div>
         </BrowserRouter>

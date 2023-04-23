@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import { registerThunk} from "../services/users-thunk";
+import {
+  findUserByUsernameThunk,
+  loginThunk,
+  registerThunk
+} from "../services/users-thunk";
 import {register} from "../services/users-service";
 function CreateProfile() {
   const [user, setUser] = useState({
@@ -10,20 +14,70 @@ function CreateProfile() {
     firstName: "",
     lastName: "",
     isAdmin: false,
+    email: "",
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {currentUser} = useSelector(state => state.users);
-  if (currentUser) {
-    navigate("/profile");
-  }
+  const [firstNameAlert, setFirstNameAlert] = useState(false);
+  const [lastNameAlert, setLastNameAlert] = useState(false);
+  const [emailAlert, setEmailAlert] = useState(false);
+  const [usernameAlert, setUsernameAlert] = useState(false);
+  const [usernameUniqueAlert, setUsernameUniqueAlert] = useState(false);
+  const [passwordAlert, setPasswordAlert] = useState(false);
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/profile");
+    }
+  });
   const register = async () => {
-    await dispatch(registerThunk(user));
-    navigate("/profile");
+    const exists = (await dispatch(findUserByUsernameThunk(user.username))).payload;
+    if (!(user.username.length < 3 || user.password.length < 3 || user.firstName.length < 2 || user.lastName.length < 2 || user.email.length < 3 || exists)) {
+      await dispatch(registerThunk(user));
+      await dispatch(loginThunk(user));
+      navigate("/profile");
+    } else {
+      setUsernameUniqueAlert(exists);
+      setFirstNameAlert(user.firstName.length < 2);
+      setLastNameAlert(user.lastName.length < 2);
+      setEmailAlert(user.email.length < 3);
+      setUsernameAlert(user.username.length < 3);
+      setPasswordAlert(user.password.length < 3);
+    }
   };
   return (
-      <div>
-        <h1>Register</h1>
+      <div className='bg-light-green mt-4 mb-4 p-3' style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <h1 style={{ textAlign: 'center' }}>Register</h1>
+        {usernameAlert && (
+            <div className="alert alert-danger" role="alert">
+              Username must be at least 3 characters!
+            </div>
+        )}
+        {usernameUniqueAlert && (
+            <div className="alert alert-danger" role="alert">
+              Username is taken!
+            </div>
+        )}
+        {passwordAlert && (
+            <div className="alert alert-danger" role="alert">
+              Password must be at least 3 characters!
+            </div>
+        )}
+        {firstNameAlert && (
+            <div className="alert alert-danger" role="alert">
+              First name must be at least 2 characters!
+            </div>
+        )}
+        {lastNameAlert && (
+            <div className="alert alert-danger" role="alert">
+              Last name must be at least 2 characters!
+            </div>
+        )}
+        {emailAlert && (
+            <div className="alert alert-danger" role="alert">
+              Email must be at least 3 characters!
+            </div>
+        )}
         <div className="form-group">
           <label>Username</label>
           <input
@@ -53,6 +107,13 @@ function CreateProfile() {
               value={user.lastName}
               onChange={(e) => setUser({ ...user, lastName: e.target.value })}
           />
+          <label>Email</label>
+          <input
+              type="text"
+              className="form-control mb-3"
+              value={user.email}
+              onChange={(e) => setUser({ ...user, email: e.target.value })}
+          />
           <label className='me-2'>Register as an Admin</label>
           <input
               type="checkbox"
@@ -61,9 +122,11 @@ function CreateProfile() {
               onChange={(e) => setUser({ ...user, isAdmin: !user.isAdmin })}
           />
           <br/>
-          <button onClick={register} className="btn btn-primary">
-            Register
-          </button>
+          <div style={{ textAlign: 'center' }}>
+            <button onClick={register} className="btn btn-primary">
+              Register
+            </button>
+          </div>
         </div>
       </div>
   );

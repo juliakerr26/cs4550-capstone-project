@@ -1,15 +1,15 @@
 import CreateProfile from "./create-profile";
 
-const Login = () => {
+const Register = () => {
   return (
       <div>
         <div className='row'>
-          <div className='col-4'></div>
-          <div className='col-4'><CreateProfile/></div>
-          <div className='col-4'></div>
+          <div className='col-3'></div>
+          <div className='col-6'><CreateProfile/></div>
+          <div className='col-3'></div>
         </div>
       </div>
   )
 }
 
-export default CreateProfile;
+export default Register;
