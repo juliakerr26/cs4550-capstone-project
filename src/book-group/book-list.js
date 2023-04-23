@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { findBookClubByIdThunk } from '../services/book-club-thunk';
 import BookListItem from './book-list-item';
 
 const BookList = () => {
-  const { currentUser } = useSelector(state => state.users);
   const { id } = useParams();
   const { bookClubs, loading } = useSelector(state => state.bookClubs);
   const dispatch = useDispatch();

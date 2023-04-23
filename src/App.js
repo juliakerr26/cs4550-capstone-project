@@ -7,7 +7,7 @@ import BookList from './book-group/book-list.js';
 import Profile from './profile';
 import Login from './login';
 import NavBar from './shared/nav-bar';
-import { BrowserRouter, Link } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { Routes, Route } from 'react-router';
 import { Provider } from 'react-redux';
 import CurrentUserContext from './redux/current-user-context';

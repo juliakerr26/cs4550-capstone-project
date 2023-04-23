@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { getBookById } from '../services/books-service';
-import { updateBookClubThunk } from '../services/book-club-thunk';
 
 const BookListItem = ({ book_id }) => {
-  const { currentUser } = useSelector(state => state.users);
   const [book, setBook] = useState({});
 
   let descriptionWithoutTags = "";
@@ -28,7 +26,7 @@ const BookListItem = ({ book_id }) => {
       {book.id && (
         <div className="row">
           <div className="col-2">
-            <img className="img-fluid" src={book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.medium}></img>
+            <img className="img-fluid" alt="book cover" src={book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.medium}></img>
           </div>
           <div className="col-10">
             <LinkContainer to={`/book-details/${book_id}`}>

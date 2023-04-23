@@ -1,6 +1,3 @@
-import * as bookService from "../services/books-service"
-import * as userService from "../services/users-service"
-
 const SavedBooks = () => {
     console.log("in saved books")
     return(

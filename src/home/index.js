@@ -1,19 +1,13 @@
-import dummybooks from '../data/books.json';
 import BookList from "../shared/book-list";
 import BookSidebar from "./book-sidebar";
 import * as service from "../services/books-service"
 import * as userService from "../services/users-service"
-import * as userThunk from "../services/users-thunk"
-import {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {updateUserThunk} from "../services/users-thunk";
-
-/* the books that are used as default here can be changed pretty easily */
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const Home = () => {
     console.log('in home');
     let { currentUser } = useSelector(state => state.users);
-    const dispatch = useDispatch();
     const [books, setBooks] = useState([]);
     const [savedBooks, setSavedBooks] = useState([]);
     const getHomeBooks = async () => {

@@ -74,34 +74,23 @@ const CreateBookClub = () => {
     }
   };
 
-  useEffect(() => {
-    if (usernameSearch) {
-      searchForUsernames();
-    }
-    if (bookSearch) {
-      searchForBooks();
-    }
-  }, [bookClubMembers, bookClubBookList, nameAlert, membersAlert, bookListAlert]);
+  useEffect(() => {}, [bookClubMembers, bookClubBookList, nameAlert, membersAlert, bookListAlert]);
 
   useEffect(() => {
     if (id) {
       dispatch(findBookClubByIdThunk(id));
     }
-  }, []);
+  });
 
   useEffect(() => {
     if (id && existingClub.name) {
       setBookClubName(existingClub.name);
 
       const memberObjects = [];
-      existingClub.members.map(id => {
-        fetchMembers(id, memberObjects);
-      })
+      existingClub.members.map(id => fetchMembers(id, memberObjects))
 
       const bookListObjects = [];
-      existingClub.bookList.map(id => {
-        fetchBook(id, bookListObjects)
-      })
+      existingClub.bookList.map(id => fetchBook(id, bookListObjects))
     }
   }, [existingClub]);
 
@@ -254,7 +243,7 @@ const CreateBookClub = () => {
                               src={
                                 (bookInfo.imageLinks && bookInfo.imageLinks.smallThumbnail) || './default-book-img.jpg'
                               }
-                              alt="book preview image"
+                              alt="book preview"
                             ></img>
                           </div>
                           <div className="col-8">
@@ -300,7 +289,7 @@ const CreateBookClub = () => {
                         <img
                           className="img-fluid"
                           src={(bookInfo.imageLinks && bookInfo.imageLinks.smallThumbnail) || './default-book-img.jpg'}
-                          alt="book preview image"
+                          alt="book preview"
                         ></img>
                       </div>
                       <div className="col-8">

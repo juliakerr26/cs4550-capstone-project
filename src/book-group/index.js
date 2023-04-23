@@ -26,7 +26,7 @@ const BookGroup = () => {
       <h3 className="d-inline-block txt-dark-orange ps-2 pt-3">Book Clubs</h3>
       {isAdmin && (
         <LinkContainer to={`/book-clubs/create`}>
-          <a className="d-inline-block btn rounded-pill align-middle float-end ms-3 mt-3">Create Book Club</a>
+          <button className="d-inline-block btn rounded-pill align-middle float-end ms-3 mt-3">Create Book Club</button>
         </LinkContainer>
       )}
       <ul className="list-group">

@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 import {updateUserThunk} from "../services/users-thunk";
 import {useDispatch, useSelector} from "react-redux";
 import * as userService from "../services/users-service"
-import {useEffect, useState} from "react";
+import { useEffect } from "react";
 const BookPreview = ({ book }) => {
     console.log("book id: " + book.id)
     let { currentUser } = useSelector(state => state.users);

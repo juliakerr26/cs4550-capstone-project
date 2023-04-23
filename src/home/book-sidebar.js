@@ -1,10 +1,7 @@
 import BookReducedPreview from "./book-reduced-preview";
 import {Link} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {updateUserThunk} from "../services/users-thunk";
+
 const BookSidebar = ({ books }) => {
-    let { currentUser } = useSelector(state => state.users);
-    const dispatch = useDispatch();
     return (
         <ul className="list-group">
             <li className="list-group-item bg-light-orange">
@@ -14,7 +11,6 @@ const BookSidebar = ({ books }) => {
                 <BookReducedPreview book={b}/>
             ))}
             <li className="list-group-item bg-light-orange">
-                {/* links to all saved books*/}
                 <Link to="/saved-books">See All</Link>
             </li>
         </ul>

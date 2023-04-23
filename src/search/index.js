@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { LinkContainer } from 'react-router-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import * as service from '../services/books-service';
 import { useParams } from 'react-router-dom';
 import BookPreview from '../shared/book-preview';
