@@ -1,22 +1,20 @@
-import React, { useState, useEffect, componentWillMount, componendDidMount } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import * as service from '../services/books-service';
-import { searchUserByUsernameThunk, findUserByIdThunk } from '../services/users-thunk';
+import { searchUserByUsernameThunk } from '../services/users-thunk';
 import { createBookClubThunk, updateBookClubThunk, findBookClubByIdThunk } from '../services/book-club-thunk';
 import { getBookById } from '../services/books-service';
-
-import testUsers from '../data/users.json';
 import { findUserById } from '../services/users-service';
 
 const CreateBookClub = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  //const { currentUser } = useSelector(state => state.users);
-  const currentUser = testUsers[0];
+  const { currentUser } = useSelector(state => state.users);
   const [usernameSearch, setUsernameSearch] = useState();
   const { returnedUsers, loading } = useSelector(state => state.users);
+  const [userSearchTriggered, setUserSearchTriggered] = useState(false);
 
   const [bookSearch, setBookSearch] = useState();
   const [bookResults, setbookResults] = useState([]);
@@ -33,6 +31,7 @@ const CreateBookClub = () => {
   const [bookListAlert, setBookListAlert] = useState(false);
 
   const searchForUsernames = async () => {
+    setUserSearchTriggered(true);
     dispatch(searchUserByUsernameThunk(usernameSearch));
   };
 
@@ -177,7 +176,7 @@ const CreateBookClub = () => {
                 </button>
               </div>
             </li>
-            {!loading && !!returnedUsers.length &&
+            {userSearchTriggered && !loading && !!returnedUsers.length &&
               returnedUsers
                 .filter(
                   user => !bookClubMembers.some(member => member._id === user._id) && user._id !== currentUser._id

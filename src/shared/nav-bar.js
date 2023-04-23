@@ -1,8 +1,11 @@
 import React from 'react';
+import { useSelector } from "react-redux";
 import { NavLink } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 
 const NavBar = () => {
+  const { currentUser } = useSelector(state => state.users);
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: '#bad1a1' }}>
       <div className="container-fluid">
@@ -23,24 +26,29 @@ const NavBar = () => {
             <LinkContainer to="/">
               <NavLink className="nav-link active">Home</NavLink>
             </LinkContainer>
-            <LinkContainer to="/saved-books">
-              <NavLink className="nav-link">Saved Books</NavLink>
-            </LinkContainer>
             <LinkContainer to="/search">
               <NavLink className="nav-link">Search</NavLink>
             </LinkContainer>
-            <LinkContainer to="/book-details/zyTCAlFPjgYC">
-              <NavLink className="nav-link">Book Details</NavLink>
-            </LinkContainer>
-            <LinkContainer to="/book-clubs">
-              <NavLink className="nav-link">Book Clubs</NavLink>
-            </LinkContainer>
-            <LinkContainer to="/profile">
-              <NavLink className="nav-link">Profile</NavLink>
-            </LinkContainer>
-            <LinkContainer to="/login">
-              <NavLink className="nav-link">Login</NavLink>
-            </LinkContainer>
+            {currentUser && (
+              <LinkContainer to="/saved-books">
+                <NavLink className="nav-link">Saved Books</NavLink>
+              </LinkContainer>
+            )}
+            {currentUser && (
+              <LinkContainer to="/book-clubs">
+                <NavLink className="nav-link">Book Clubs</NavLink>
+              </LinkContainer>
+            )}
+            {currentUser && (
+              <LinkContainer to="/profile">
+                <NavLink className="nav-link float-end">Profile</NavLink>
+              </LinkContainer>
+            )}
+            {!currentUser && (
+              <LinkContainer to="/login">
+                <NavLink className="nav-link float-end">Login</NavLink>
+              </LinkContainer>
+            )}
           </div>
         </div>
       </div>

@@ -35,15 +35,15 @@ const UsersSearch = () => {
     <>
       <h3 className="d-inline-block txt-dark-orange ps-2 pt-3">Search for Books</h3>
       <ul className="nav nav-tabs">
-        <li className="nav-item">
-          <LinkContainer to="/search">
-            <NavLink className="nav-link">Books</NavLink>
-          </LinkContainer>
+      <li className="nav-item">
+          <a class="nav-link txt-dark-orange" href="/search">
+            Search
+          </a>
         </li>
         <li className="nav-item">
-          <LinkContainer to="/search/users">
-            <NavLink className="nav-link active">Users</NavLink>
-          </LinkContainer>
+          <a class="nav-link active" href="/search/users">
+            Users
+          </a>
         </li>
       </ul>
       <div className="input-group p-2">
