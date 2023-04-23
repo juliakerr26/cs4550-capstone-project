@@ -2,38 +2,57 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { updateUserThunk } from '../services/users-thunk';
+import { findUserById } from '../services/users-service';
 import { getBookById } from '../services/books-service';
-import '../index.css';
-
-import testingBook from '../data/books.json';
+import '../index.css'
 
 const BookDetails = () => {
   const { currentUser } = useSelector(state => state.users);
+  const [ loggedInUser, setLoggedInUser ] = useState();
   const { id } = useParams();
   const [book, setBook] = useState({});
+
   const dispatch = useDispatch();
+
   const fetchBook = async () => {
     const bookObject = await getBookById(id);
     setBook(bookObject);
   };
+
   useEffect(() => {
     fetchBook();
   }, []);
-  const addBookmarkHandler = book_id => {
+
+  useEffect(() => {
+    if (currentUser) {
+      getCurrentUserObj();
+    }
+  }, [loggedInUser])
+
+  const getCurrentUserObj = async () => {
+    const updatedUser = await findUserById(currentUser._id);
+    setLoggedInUser(updatedUser);
+  }
+
+  const addBookmarkHandler = async () => {
+    const currentBookList = [...loggedInUser.bookList, id];
     dispatch(
       updateUserThunk({
-        ...currentUser,
-        bookList: currentUser.bookList.push(book_id)
+        ...loggedInUser,
+        bookList: currentBookList
       })
     );
+    getCurrentUserObj();
   };
-  const removeBookmarkHandler = book_id => {
+
+  const removeBookmarkHandler = async () => {
     dispatch(
       updateUserThunk({
-        ...currentUser,
-        bookList: currentUser.bookList.filter(id => id !== book_id)
+        ...loggedInUser,
+        bookList: loggedInUser.bookList.filter(book_id => book_id !== id)
       })
     );
+    getCurrentUserObj();
   };
 
   return (
@@ -63,10 +82,10 @@ const BookDetails = () => {
         </div>
         <div className="col-8 txt-dark-green">
           <div>
-            {currentUser && currentUser.bookList.includes(book.id) &&
-            (<i className="fa fa-solid fa-bookmark fa-lg float-end p-3" onClick={removeBookmarkHandler(book.id)} style={{ color: '#264653' }}></i>)}
-            {currentUser && !currentUser.bookList.includes(book.id) &&
-            (<i className="fa fa-regular fa-bookmark fa-lg float-end p-3" onClick={addBookmarkHandler(book.id)} style={{ color: '#264653' }}></i>)}
+            {loggedInUser && loggedInUser.bookList.includes(book.id) &&
+            (<i className="bi bi-bookmark-fill fa-2x float-end pe-3" onClick={removeBookmarkHandler} style={{ color: '#264653' }}></i>)}
+            {loggedInUser && !loggedInUser.bookList.includes(book.id) &&
+            (<i className="bi bi-bookmark fa-2x float-end pe-3" onClick={addBookmarkHandler} style={{ color: '#264653' }}></i>)}
             <h1>{book.volumeInfo.title}</h1>
           </div>
           <h3>{book.volumeInfo.subtitle}</h3>

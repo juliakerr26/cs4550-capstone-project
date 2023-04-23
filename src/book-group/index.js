@@ -3,14 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { LinkContainer } from 'react-router-bootstrap';
 import { findBookClubsThunk } from '../services/book-club-thunk';
 import BookClubItem from './book-club-item';
-import '../index.css';
-
-import TestingBookClub from '../data/book-clubs.json';
-import users from '../data/users.json';
 
 const BookGroup = () => {
-  //const { currentUser } = useSelector(state => state.users);
-  const currentUser = users[0];
+  const { currentUser } = useSelector(state => state.users);
   const { bookClubs, loading } = useSelector(state => state.bookClubs);
   const dispatch = useDispatch();
 

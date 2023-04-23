@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { searchUserByUsernameThunk } from '../services/users-thunk';
 
 const UsersSearch = () => {
+  const { currentUser } = useSelector(state => state.users);
   const { query } = useParams();
   const [usernameSearch, setUsernameSearch] = useState(query);
   const { returnedUsers, loading } = useSelector(state => state.users);
@@ -51,7 +52,7 @@ const UsersSearch = () => {
             type="search"
             id="search-bar"
             className="form-control"
-            placeholder="Search"
+            placeholder="Search by username"
             value={usernameSearch}
             onChange={event => setUsernameSearch(event.target.value)}
           />
@@ -62,20 +63,29 @@ const UsersSearch = () => {
       </div>
       <ul className="list-group row ps-3">
         {loading && <li className="list-group-item col-8">Loading...</li>}
-        {!searchTriggered && <h5 className={'m-2 fw-light fst-italic txt-dark-green'}>Enter a search to view users!</h5>}
+        {!searchTriggered && (
+          <h5 className={'m-2 fw-light fst-italic txt-dark-green'}>Enter a search to view users!</h5>
+        )}
         {!!returnedUsers.length &&
           searchTriggered &&
-          returnedUsers.map(user => (
-            <li className="list-group-item col-8 rounded mb-1 bg-light-green">
-              <img width={70} className="float-start rounded me-2" src="/images/profile-img.jpg" />
-              <LinkContainer to={`/profile/${user.username}`}>
-                <b className="txt-dark-orange">
-                  {user.firstName} {user.lastName}
-                </b>
-              </LinkContainer>
-              <p className="fw-light fst-italic">{user.username}</p>
-            </li>
-          ))}
+          returnedUsers
+            .filter(user => (currentUser ? currentUser._id !== user._id : true))
+            .map(user => (
+              <li className="list-group-item col-8 rounded mb-1 bg-light-green">
+                <img width={70} className="float-start rounded me-2" src="/images/profile-img.jpg" />
+                <LinkContainer to={`/profile/${user.username}`}>
+                  <b className="txt-dark-orange">
+                    {user.firstName} {user.lastName}
+                  </b>
+                </LinkContainer>
+                <p className="fw-light fst-italic">{user.username}</p>
+              </li>
+            ))}
+        {!!returnedUsers.length &&
+          searchTriggered &&
+          !returnedUsers.filter(user => (currentUser ? currentUser._id !== user._id : true)).length && (
+            <li className="list-group-item col-8">No users match your search.</li>
+          )}
       </ul>
     </>
   );
