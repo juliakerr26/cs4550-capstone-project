@@ -1,21 +1,18 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import { deleteBookClubThunk } from '../services/book-club-thunk';
 
-const BookClubItem = ({
-    club = {
-      _id: 123,
-      name: 'Book Club Name',
-      admin: 'abc',
-      members: [],
-      bookList: [],
-    },
-    isAdmin = true
-  }) => {
+const BookClubItem = ({ club, isAdmin = true }) => {
   const dispatch = useDispatch();
-  const deleteClubHandler = id => {
-    dispatch(deleteBookClubThunk(id));
+  const navigate = useNavigate();
+
+  const deleteClubHandler = () => {
+    dispatch(deleteBookClubThunk(club._id));
+  };
+  const updateClubHandler = () => {
+    navigate(`/book-clubs/edit/${club._id}`);
   };
 
   return (
@@ -27,20 +24,27 @@ const BookClubItem = ({
             <LinkContainer to={`/book-clubs/${club._id}`}>
               <div className="fw-bolder txt-dark-orange">{club.name}</div>
             </LinkContainer>
+            <div className="txt-dark-green">
               Members: {club.members.length}
               <br />
-              Books: {club.bookList.length}
+              Reading List: {club.bookList.length}
+            </div>
           </div>
         </div>
-        <div className="col-2">
-          {isAdmin && (
+        {isAdmin && (
+          <div className="col-2">
             <i
-              className="fa fa-solid fa-trash fa-2xl float-end p-4"
-              onClick={() => deleteClubHandler(club._id)}
+              className="fa fa-solid fa-pen fa-2xl float-end pt-4 pe-3"
+              onClick={() => updateClubHandler()}
+              style={{ color: '#264653' }}
+            ></i>
+            <i
+              className="fa fa-solid fa-trash fa-2xl float-end pt-4 pe-3"
+              onClick={() => deleteClubHandler()}
               style={{ color: '#e32400' }}
             ></i>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </li>
   );

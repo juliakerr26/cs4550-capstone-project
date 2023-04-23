@@ -6,7 +6,7 @@ const NavBar = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light" style={{ backgroundColor: '#bad1a1' }}>
       <div className="container-fluid">
-        <a className="navbar-brand">Navbar</a>
+        <a className="navbar-brand">Bookish</a>
         <button
           className="navbar-toggler"
           type="button"
@@ -22,6 +22,9 @@ const NavBar = () => {
           <div className="navbar-nav">
             <LinkContainer to="/">
               <NavLink className="nav-link active">Home</NavLink>
+            </LinkContainer>
+            <LinkContainer to="/saved-books">
+              <NavLink className="nav-link">Saved Books</NavLink>
             </LinkContainer>
             <LinkContainer to="/search">
               <NavLink className="nav-link">Search</NavLink>

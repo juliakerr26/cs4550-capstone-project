@@ -6,17 +6,17 @@ export const createBookClubThunk = createAsyncThunk('/bookClubs/createClub', asy
   return newClub;
 });
 
-export const findBookClubsThunk = createAsyncThunk('/bookClubs/findClubs', async () => {
-  await service.findBookClubs();
-});
+export const findBookClubsThunk = createAsyncThunk('/bookClubs/findClubs', async () => await service.findBookClubs());
 
-export const findBookClubByIdThunk = createAsyncThunk('/bookClubs/findClubById', async id => {
-  await service.findBookClubById(id);
-});
+export const findBookClubByIdThunk = createAsyncThunk(
+  '/bookClubs/findClubById',
+  async id => await service.findBookClubById(id)
+);
 
-export const updateBookClubThunk = createAsyncThunk('/bookClubs/updateClub', async club => {
-  await service.updateBookClub(club);
-});
+export const updateBookClubThunk = createAsyncThunk(
+  '/bookClubs/updateClub',
+  async club => await service.updateBookClub(club)
+);
 
 export const deleteBookClubThunk = createAsyncThunk('/bookClubs/deleteClub', async clubId => {
   await service.deleteBookClub(clubId);

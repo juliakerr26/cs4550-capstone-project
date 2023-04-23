@@ -1,13 +1,24 @@
 import BookReducedPreview from "./book-reduced-preview";
-const BookSidebar = (bookParam) => {
-    const books = bookParam.bookParam;
+import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {updateUserThunk} from "../services/users-thunk";
+const BookSidebar = ({ books }) => {
+    let { currentUser } = useSelector(state => state.users);
+    const dispatch = useDispatch();
     return (
         <ul className="list-group">
-            {books.map(b => (
-                <BookReducedPreview bookParam={b}/>
+            <li className="list-group-item bg-light-orange">
+                Saved Books
+            </li>
+            { books.map(b => (
+                <BookReducedPreview book={b}/>
             ))}
+            <li className="list-group-item bg-light-orange">
+                {/* links to all saved books*/}
+                <Link to="/saved-books">See All</Link>
+            </li>
         </ul>
     )
 }
 
-export default BookSidebar
+export default BookSidebar;

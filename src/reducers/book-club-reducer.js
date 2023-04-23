@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { createBookClubThunk, findBookClubsThunk, updateBookClubThunk, deleteBookClubThunk } from '../services/book-club-thunk';
+import { createBookClubThunk, findBookClubsThunk, findBookClubByIdThunk, updateBookClubThunk, deleteBookClubThunk } from '../services/book-club-thunk';
 
 const initialState = {
   bookClubs: [],
@@ -7,6 +7,7 @@ const initialState = {
 }
 
 const templateBookClub = {
+  name: "",
   admin: "",
   bookList: [],
   users: [],
@@ -25,6 +26,18 @@ const bookClubsSlice = createSlice({
       state.bookClubs = payload;
     },
     [findBookClubsThunk.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.error;
+    },
+    [findBookClubByIdThunk.pending]: state => {
+      state.loading = true;
+      state.bookClubs = [];
+    },
+    [findBookClubByIdThunk.fulfilled]: (state, { payload }) => {
+      state.loading = false;
+      state.bookClubs = payload;
+    },
+    [findBookClubByIdThunk.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.error;
     },
