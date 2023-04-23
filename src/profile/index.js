@@ -1,18 +1,28 @@
-import {useDispatch, useSelector} from "react-redux";
-import {logoutThunk} from "../services/users-thunk";
 import React from "react";
+import ProfileComponent from "./profile-component";
+import {useSelector} from "react-redux";
+import {useNavigate, useParams} from "react-router";
 
 const Profile = () => {
-  const dispatch = useDispatch();
+  const { username } = useParams();
   const {currentUser} = useSelector(state => state.users);
-  const handleLogout = async () => await dispatch(logoutThunk());
-  console.log(currentUser);
+  const navigate = useNavigate();
+  let us;
+  let canEdit;
+  if (username) {
+    us = username;
+    canEdit = false;
+  } else {
+    if (!currentUser) {
+      navigate('/login');
+    } else {
+      us = currentUser.username;
+      canEdit = true;
+    }
+  }
   return (
     <div>
-      <h1>Profile</h1>
-      <button onClick={handleLogout} className="btn btn-primary">
-        Logout
-      </button>
+      <ProfileComponent username={us} canEdit={canEdit}/>
     </div>
   )
 }

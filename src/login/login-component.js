@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import { loginThunk } from "../services/users-thunk";
@@ -10,14 +10,17 @@ function LoginScreen() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {currentUser} = useSelector(state => state.users);
-  if (currentUser) {
-    navigate("/profile");
-  }
+  useEffect(() => {
+    if (currentUser) {
+      navigate("/profile");
+    }
+  });
+  const [invalidAlert, setInvalidAlert] = useState(false);
   const login = async () => {
     console.log('clicked');
     const ret = await dispatch(loginThunk(user));
     if (ret.type === 'users/login/rejected') {
-
+      setInvalidAlert(true);
     } else {
       navigate("/profile");
     }
@@ -25,6 +28,11 @@ function LoginScreen() {
   return (
       <div className='bg-light-green mt-4 p-3' style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
         <h1 style={{ textAlign: 'center' }}>Login</h1>
+        {invalidAlert && (
+            <div className="alert alert-danger" role="alert">
+              Invalid login credentials!
+            </div>
+        )}
         <div className="form-group">
           <label>Username</label>
           <input
