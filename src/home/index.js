@@ -21,7 +21,7 @@ const Home = () => {
 
     const getSavedBooks = async () => {
         // dummy user for now, just to see if it would render. it should work for the logged in user
-        currentUser = await userService.findUserById("6436dd3d62713ff5c9e4e28c");
+        // currentUser = await userService.findUserById("6436dd3d62713ff5c9e4e28c");
         // currentUser = await userThunk.findUserByUsernameThunk("julia");
         // currentUser = await userService.findUserByUsername("julia");
         console.log("this is current user");
@@ -59,8 +59,11 @@ const Home = () => {
         //     setSavedBooks(savedBooks);
         //     getSavedBooks();
         // }
-        getSavedBooks();
+
     }, []);
+    useEffect(() => {
+        getSavedBooks();
+    }, [savedBooks])
 
     return (
         <div className="row mb-2">

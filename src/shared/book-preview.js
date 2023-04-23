@@ -1,8 +1,8 @@
 import {Link} from "react-router-dom";
 import {updateUserThunk} from "../services/users-thunk";
 import {useDispatch, useSelector} from "react-redux";
-import * as userService from "../services/users-service"
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
+import {findUserById} from "../services/users-service";
 const BookPreview = ({ book }) => {
     console.log("book id: " + book.id)
     let { currentUser } = useSelector(state => state.users);
@@ -11,48 +11,54 @@ const BookPreview = ({ book }) => {
     // console.log(book)
     // console.log("in book preview, here's book param we got");
     // console.log(book);
-    // const [user, setUser] = useState(null);
+    const [user, setUser] = useState();
+    console.log("book prev current user")
+    console.log(currentUser);
     const bookInfo = book.volumeInfo;
-    const addBookmark = (book_id) => {
+    useEffect( () => {
+        if(currentUser) {
+            getCurrentUser();
+        }
+    }, [currentUser]);
+
+    const addBookmark = async (book_id) => {
         console.log("here add to the user's bookList")
-        dispatch(
-            updateUserThunk({
-                                ...currentUser,
-                                bookList: currentUser.bookList.push(book_id)
-                            }));
+        let temp = [...user.bookList];
+        temp = [...temp, book_id];
+        console.log("this is temp");
+        console.log(temp);
+        // temp = temp.push(book_id);
+        dispatch( updateUserThunk({ ...user, //,
+                               bookList: temp
+            }));// currentUser.bookList.push(book_id) }));
+        console.log('end of addBookmark method');
+        getCurrentUser();
     };
 
-    const removeBookmark = (book_id) => {
+    const removeBookmark = async (book_id) => {
         console.log("removing book from user's booklist")
-        dispatch(
-            updateUserThunk({
-                                ...currentUser,
-                                bookList: currentUser.bookList.filter((id) => id !== book_id)
-                            }));
+        dispatch( updateUserThunk({ ...user,
+                                bookList: user.bookList.filter((id) => id !== book_id)}));
+        console.log('end of removeBookmark method');
+        getCurrentUser();
     };
-    const getUser = async () => {
-        currentUser = await userService.findUserByUsername("julia");
+    const getCurrentUser = async () => {
+        // currentUser = await userService.findUserByUsername("julia");
         // setUser(currentUser)
         // console.log("user in prev");
         // console.log(user);
-        if (currentUser){
-            console.log("true prev, this is currentUser");
-            console.log(currentUser);
-        }
-        else {
-            console.log('COMING UP FALSE');
-        }
+        // if (currentUser){
+        //     console.log("true prev, this is currentUser");
+        //     console.log(currentUser);
+        // }
+        // else {
+        //     console.log('COMING UP FALSE');
+        // }
+        const updatedUser = await findUserById(currentUser._id);
+        setUser(updatedUser);
     }
-    useEffect( () => {
-        console.log("in useEffect")
-        if (currentUser) {
-            console.log('have user ' + currentUser);
-        }
-        else {
-            console.log("getting user")
-            getUser();
-        }
-    }, []);
+    // in users service, make credentials true
+
     return (
         <li className="list-group-item bg-light-green rounded p-2 mb-1">
             <div className="row">
@@ -68,28 +74,28 @@ const BookPreview = ({ book }) => {
                         bookInfo.description.substring(0,350)
                             .replaceAll('<b>', "")
                             .replaceAll('</b>', "")
-                            .replaceAll('<br>', " ")}...
+                            .replaceAll('<br>', " ")}
+                        ...
                     </div>
                 </div>
                 <div className="col-1 align-self-center ps-2">
                     {/* TODO: add onclick functionality => save into Saved Books */}
-                    {
-                        (currentUser && (book.id in currentUser.bookList) && (
-                            <i className="fa fa-bookmark"
-                            onClick={ removeBookmark(book.id) }></i>
-                                    ))
-                        ||
-                        (
-                            currentUser && !(book.id in currentUser.bookList) && (
-                                <i className="fa fa-heart"
-                                onClick={ addBookmark(book.id) }></i>
-                                ))
+                    { (user && (user.bookList.includes(book.id)) &&
+                       ( <i className="bi bi-bookmark-fill"
+                            onClick={ () => removeBookmark(book.id) }></i> ))
+                    }
+                    { (user && !(user.bookList.includes(book.id)) && (
+                                <i className="bi bi-bookmark"
+                                onClick={ () => addBookmark(book.id) }></i> ))
                         // (
                         //     console.log("hi " + user)
                         // )
                         // || (
                         //     <h6>weird</h6>
                         // )
+                    }
+                    {
+                        !user && (<h6>no one</h6>)
                     }
                 </div>
             </div>
