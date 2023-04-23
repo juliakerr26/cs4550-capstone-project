@@ -27,7 +27,7 @@ const Search = () => {
                            placeholder="Search" value={query}/>
                 </div>
                 {/* onclick return search results*/}
-                <button type="button" className="btn bg-dark-green" onClick={}>
+                <button type="button" className="btn bg-dark-green">
                     <i className="fas fa-search"></i>
                 </button>
             </div>

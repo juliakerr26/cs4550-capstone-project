@@ -1,7 +1,13 @@
+import LoginComponent from "./login-component";
+
 const Login = () => {
   return (
     <div>
-      <h1>Login</h1>
+      <div className='row'>
+        <div className='col-4'></div>
+        <div className='col-4'><LoginComponent/></div>
+        <div className='col-4'></div>
+      </div>
     </div>
   )
 }

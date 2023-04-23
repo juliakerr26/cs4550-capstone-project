@@ -1,6 +1,6 @@
 import axios from "axios";
 // const API_BASE = process.env.REACT_APP_API_BASE;
-const API_BASE = "TBD";
+const API_BASE = "http://localhost:4000/api";
 const USERS_API = `${API_BASE}/users`
 
 const api = axios.create({
@@ -43,6 +43,7 @@ export const deleteUser = async (id) => {
 };
 
 export const login = async (user) => {
+  console.log(`${USERS_API}/login`);
   const response = await api.post(`${USERS_API}/login`, user);
   return response.data;
 };

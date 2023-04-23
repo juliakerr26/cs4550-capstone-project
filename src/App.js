@@ -15,6 +15,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import CurrentUserContext from './redux/current-user-context';
 import store from './redux/store'
+import CreateProfile from "./create-profile";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
               <Route path="/book-clubs/:id" element={<BookList/>} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/create-profile" element={<CreateProfile />} />
             </Routes>
           </div>
         </BrowserRouter>
