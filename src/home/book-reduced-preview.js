@@ -9,6 +9,7 @@ const BookReducedPreview = ({book}) => {
     const dispatch = useDispatch();
     const [user, setUser] = useState();
     // const book = bookParam.bookParam;
+    console.log(book)
     const bookInfo = book.volumeInfo;
     console.log("book reduced preview book info");
     console.log(bookInfo);
