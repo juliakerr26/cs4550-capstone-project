@@ -37,7 +37,7 @@ const Search = () => {
           </a>
         </li>
         <li className="nav-item">
-          <a class="nav-link txt-dark-orange" href="/search/users">
+          <a className="nav-link txt-dark-orange" href="/search/users">
             Users
           </a>
         </li>

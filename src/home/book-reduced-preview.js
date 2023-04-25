@@ -5,7 +5,9 @@ import {findUserById} from "../services/users-service";
 import {updateUserThunk} from "../services/users-thunk";
 
 const BookReducedPreview = ({book}) => {
-    const { currentUser } = useSelector(state => state.users);
+    console.log("reduced preview current book");
+    console.log(book)
+    const { currentUser, loading } = useSelector(state => state.users);
     const dispatch = useDispatch();
     const [user, setUser] = useState();
     // const book = bookParam.bookParam;
@@ -22,7 +24,8 @@ const BookReducedPreview = ({book}) => {
         if (currentUser) {
             getCurrentUser();
         }
-    }, [currentUser])
+    }, [user])
+
     const addBookmark = async (book_id) => {
         console.log("here add to the user's bookList")
         let temp = [...user.bookList];
@@ -40,16 +43,18 @@ const BookReducedPreview = ({book}) => {
                                       bookList: user.bookList.filter((id) => id !== book_id)}));
         getCurrentUser();
     };
+
     return (
+        (!loading && book.id && (
         <li className="list-group-item bg-light-orange p-2">
             <div className="row">
                 <div className="col-2 d-none d-lg-block">
                     <img className="img-fluid" src={bookInfo.imageLinks && bookInfo.imageLinks.thumbnail} alt="book image preview"></img>
                 </div>
-                <div className="col-8 fs-7 fw-light" style={{fontSize: 12}}>
+                <div className="col-7 fs-7 fw-light" style={{fontSize: 12}}>
                     <Link to={`/book-details/${book.id}`}>{bookInfo.title}</Link>
                 </div>
-                <div className="col-2">
+                <div className="col-3">
                     {/*<i className="fa fa-bookmark"></i>*/}
                     { (user && (user.bookList.includes(book.id)) &&
                        ( <i className="bi bi-bookmark-fill"
@@ -59,10 +64,13 @@ const BookReducedPreview = ({book}) => {
                         <i className="bi bi-bookmark"
                            onClick={ () => addBookmark(book.id) }></i> ))
                     }
-                    { !user && (<h6>no one</h6>) }
+                    {/*{ !user && (<h6>no one</h6>) }*/}
                 </div>
             </div>
         </li>
+        ))
+        ||
+        (<li className="list-group-item bg-light-orange">Loading...</li>) // loading &&
     )
 }
 

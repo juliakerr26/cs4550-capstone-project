@@ -19,19 +19,20 @@ const BookPreview = ({ book }) => {
         if(currentUser) {
             getCurrentUser();
         }
-    }, [currentUser]);
+    }, [user]);
 
     const addBookmark = async (book_id) => {
-        console.log("here add to the user's bookList")
+        console.log("adding " + book_id + " to user's bookList");
+        // console.log("here add to the user's bookList")
         let temp = [...user.bookList];
         temp = [...temp, book_id];
-        console.log("this is temp");
-        console.log(temp);
+        // console.log("this is temp");
+        // console.log(temp);
         // temp = temp.push(book_id);
         dispatch( updateUserThunk({ ...user, //,
                                bookList: temp
             }));// currentUser.bookList.push(book_id) }));
-        console.log('end of addBookmark method');
+        // console.log('end of addBookmark method');
         getCurrentUser();
     };
 
@@ -43,21 +44,9 @@ const BookPreview = ({ book }) => {
         getCurrentUser();
     };
     const getCurrentUser = async () => {
-        // currentUser = await userService.findUserByUsername("julia");
-        // setUser(currentUser)
-        // console.log("user in prev");
-        // console.log(user);
-        // if (currentUser){
-        //     console.log("true prev, this is currentUser");
-        //     console.log(currentUser);
-        // }
-        // else {
-        //     console.log('COMING UP FALSE');
-        // }
         const updatedUser = await findUserById(currentUser._id);
         setUser(updatedUser);
     }
-    // in users service, make credentials true
 
     return (
         <li className="list-group-item bg-light-green rounded p-2 mb-1">
@@ -79,7 +68,6 @@ const BookPreview = ({ book }) => {
                     </div>
                 </div>
                 <div className="col-1 align-self-center ps-2">
-                    {/* TODO: add onclick functionality => save into Saved Books */}
                     { (user && (user.bookList.includes(book.id)) &&
                        ( <i className="bi bi-bookmark-fill"
                             onClick={ () => removeBookmark(book.id) }></i> ))
@@ -94,9 +82,10 @@ const BookPreview = ({ book }) => {
                         //     <h6>weird</h6>
                         // )
                     }
-                    {
-                        !user && (<h6>no one</h6>)
-                    }
+                    {/*{*/}
+                    {/*    // to be taken out later, just to know if there's no current user*/}
+                    {/*    !user && (<h6>no one</h6>)*/}
+                    {/*}*/}
                 </div>
             </div>
         </li>

@@ -30,11 +30,6 @@ const NavBar = () => {
               <NavLink className="nav-link">Search</NavLink>
             </LinkContainer>
             {currentUser && (
-              <LinkContainer to="/saved-books">
-                <NavLink className="nav-link">Saved Books</NavLink>
-              </LinkContainer>
-            )}
-            {currentUser && (
               <LinkContainer to="/book-clubs">
                 <NavLink className="nav-link">Book Clubs</NavLink>
               </LinkContainer>

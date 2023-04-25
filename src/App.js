@@ -29,7 +29,7 @@ function App() {
               <Route path="/search/:query" element={<Search />} />
               <Route path="search/users" element={<UsersSearch />} />
               <Route path="search/users/:query" element={<UsersSearch />} />
-              <Route path="/saved-books" element={<SavedBooks />} />
+              {/*<Route path="/saved-books" element={<SavedBooks />} />*/}
               <Route path="/book-details/:id" element={<BookDetails />} />
               <Route path="/book-clubs" element={<BookGroup />} />
               <Route path="/book-clubs/create" element={<CreateBookClub />} />
