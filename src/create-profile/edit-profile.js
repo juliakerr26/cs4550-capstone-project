@@ -4,9 +4,10 @@ import {useDispatch, useSelector} from "react-redux";
 import {
   findUserByUsernameThunk,
   loginThunk,
-  registerThunk, updateUserThunk
+  updateUserThunk
 } from "../services/users-thunk";
-import {register} from "../services/users-service";
+import { findUserById } from '../services/users-service';
+
 function EditProfile() {
   const {currentUser} = useSelector(state => state.users);
   const originalUsername = currentUser.username;
@@ -23,7 +24,16 @@ function EditProfile() {
     if (!currentUser) {
       navigate("/login");
     }
-  });
+    if (currentUser) {
+      getCurrentUserObj();
+    }
+  }, []);
+
+  const getCurrentUserObj = async () => {
+    const updatedUser = await findUserById(currentUser._id);
+    setUser(updatedUser);
+  };
+
   const edit = async () => {
     const exists = (await dispatch(findUserByUsernameThunk(user.username))).payload && user.username !== originalUsername;
     if (!(user.username.length < 3 || user.password.length < 3 || user.firstName.length < 2 || user.lastName.length < 2 || user.email.length < 3 || exists)) {
