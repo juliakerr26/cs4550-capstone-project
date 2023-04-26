@@ -45,7 +45,7 @@ const BookReducedPreview = ({ book }) => {
     }
   }, []);
 
-  return ( user && user.bookList.includes(book.id) &&
+  return ( //user && user.bookList.includes(book.id) &&
     <li className="list-group-item bg-light-orange p-2">
       {console.log('infinite rerender in reduced flag')}
       {loading && <li className="list-group-item bg-light-orange">Loading...</li>}

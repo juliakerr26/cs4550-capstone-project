@@ -52,6 +52,9 @@ const Home = () => {
     };
 
     const addBookmarkHandler = async (book_id) => {
+        console.log("adding bookmark for " + book_id)
+        console.log("user booklist before:")
+        console.log(user.bookList);
         const currentBookList = [...user.bookList, book_id];
         dispatch(
             updateUserThunk({
@@ -60,9 +63,14 @@ const Home = () => {
                             })
         );
         getCurrentUser();
+        console.log('user booklist after: ')
+        console.log(user.bookList)
     };
 
     const removeBookmarkHandler = async (book_id) => {
+        console.log("removing bookmark for " + book_id)
+        console.log("user booklist before:")
+        console.log(user.bookList);
         dispatch(
             updateUserThunk({
                                 ...user,
@@ -70,6 +78,8 @@ const Home = () => {
                             })
         );
         getCurrentUser();
+        console.log('user booklist after: ')
+        console.log(user.bookList)
     };
 
     useEffect(() => {
