@@ -55,9 +55,11 @@ function ProfileComponent({ username, canEdit, loggedIn }) {
             </button>}
           </div>
           <div className="col-6 txt-dark-green">
-            <h5>
-              {returnedUsers.firstName} {returnedUsers.lastName}
-            </h5>
+            <div>
+              <h5>
+                {returnedUsers.firstName} {returnedUsers.lastName} {returnedUsers.isAdmin && <span>· <span className='text-danger'>Admin</span></span>}
+              </h5>
+            </div>
             <div>@{returnedUsers.username}</div>
             <div>Member Since: {returnedUsers.createdOn}</div>
             {loggedIn && <div>Email: {returnedUsers.email}</div>}
