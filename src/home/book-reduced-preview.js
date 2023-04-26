@@ -14,6 +14,8 @@ const BookReducedPreview = ({ book }) => {
   const getCurrentUserObj = async () => {
     const updatedUser = await findUserById(currentUser._id);
     setUser(updatedUser);
+    console.log("user");
+    console.log(user);
   }
 
   const addBookmarkHandler = async () => {
@@ -43,7 +45,7 @@ const BookReducedPreview = ({ book }) => {
     }
   }, []);
 
-  return (
+  return ( user && user.bookList.includes(book.id) &&
     <li className="list-group-item bg-light-orange p-2">
       {console.log('infinite rerender in reduced flag')}
       {loading && <li className="list-group-item bg-light-orange">Loading...</li>}
@@ -61,10 +63,10 @@ const BookReducedPreview = ({ book }) => {
           </div>
           <div className="col-3">
             {user && user.bookList.includes(book.id) && (
-              <i className="bi bi-bookmark-fill" onClick={() => removeBookmarkHandler}></i>
+              <i className="bi bi-bookmark-fill" onClick={() => removeBookmarkHandler()}></i>
             )}
             {user && !user.bookList.includes(book.id) && (
-              <i className="bi bi-bookmark" onClick={() => addBookmarkHandler}></i>
+              <i className="bi bi-bookmark" onClick={() => addBookmarkHandler()}></i>
             )}
           </div>
         </div>

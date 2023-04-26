@@ -24,6 +24,9 @@ const BookPreview = ({ book }) => {
   }
 
   const addBookmarkHandler = async () => {
+    console.log("adding bookmark");
+    console.log("book id " + book.id)
+    console.log("book list before [" + user.bookList + "]")
     const currentBookList = [...user.bookList, book.id];
     dispatch(
       updateUserThunk({
@@ -32,9 +35,14 @@ const BookPreview = ({ book }) => {
       })
     );
     getCurrentUserObj();
+    console.log("user bookList after");
+    console.log(user.bookList);
   };
 
   const removeBookmarkHandler = async () => {
+    console.log("removing bookmark");
+    console.log("book id " + book.id)
+    console.log("book list before [" + user.bookList + ']')
     dispatch(
       updateUserThunk({
         ...user,
@@ -42,6 +50,8 @@ const BookPreview = ({ book }) => {
       })
     );
     getCurrentUserObj();
+    console.log("user bookList after");
+    console.log(user.bookList);
   };
 
   useEffect(() => {
@@ -79,10 +89,10 @@ const BookPreview = ({ book }) => {
         </div>
         <div className="col-1 align-self-center ps-2">
           {user && user.bookList.includes(book.id) && (
-            <i className="bi bi-bookmark-fill" onClick={() => removeBookmarkHandler}></i>
+            <i className="bi bi-bookmark-fill" onClick={() => removeBookmarkHandler()}></i>
           )}
           {user && !user.bookList.includes(book.id) && (
-            <i className="bi bi-bookmark" onClick={() => addBookmarkHandler}></i>
+            <i className="bi bi-bookmark" onClick={() => addBookmarkHandler()}></i>
           )}
         </div>
       </div>
