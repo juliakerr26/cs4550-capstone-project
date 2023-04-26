@@ -32,7 +32,7 @@ const Search = () => {
       <h3 className="d-inline-block txt-dark-orange ps-2 pt-3">Search for Books</h3>
       <ul className="nav nav-tabs">
         <li className="nav-item">
-          <a class="nav-link active" href="/search">
+          <a className="nav-link active" href="/search">
             Search
           </a>
         </li>

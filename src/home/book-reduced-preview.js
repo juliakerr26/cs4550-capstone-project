@@ -1,77 +1,76 @@
-import {Link} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {useEffect, useState} from "react";
-import {findUserById} from "../services/users-service";
-import {updateUserThunk} from "../services/users-thunk";
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { findUserById } from '../services/users-service';
+import { updateUserThunk } from '../services/users-thunk';
 
-const BookReducedPreview = ({book}) => {
-    console.log("reduced preview current book");
-    console.log(book)
-    const { currentUser, loading } = useSelector(state => state.users);
-    const dispatch = useDispatch();
-    const [user, setUser] = useState();
-    // const book = bookParam.bookParam;
-    console.log(book)
-    const bookInfo = book.volumeInfo;
-    console.log("book reduced preview book info");
-    console.log(bookInfo);
+const BookReducedPreview = ({ book }) => {
+  const { currentUser, loading } = useSelector(state => state.users);
+  const [user, setUser] = useState();
+  const bookInfo = book.volumeInfo;
 
-    const getCurrentUser = async () => {
-        const updatedUser = await findUserById(currentUser._id);
-        setUser(updatedUser);
+  const dispatch = useDispatch();
+
+  const getCurrentUserObj = async () => {
+    const updatedUser = await findUserById(currentUser._id);
+    setUser(updatedUser);
+  }
+
+  const addBookmarkHandler = async () => {
+    const currentBookList = [...user.bookList, book.id];
+    dispatch(
+      updateUserThunk({
+        ...user,
+        bookList: currentBookList
+      })
+    );
+    getCurrentUserObj();
+  };
+
+  const removeBookmarkHandler = async () => {
+    dispatch(
+      updateUserThunk({
+        ...user,
+        bookList: user.bookList.filter(id => id !== book.id)
+      })
+    );
+    getCurrentUserObj();
+  };
+
+  useEffect(() => {
+    if (currentUser) {
+        getCurrentUserObj();
     }
-    useEffect(() => {
-        if (currentUser) {
-            getCurrentUser();
-        }
-    }, [user])
+  }, []);
 
-    const addBookmark = async (book_id) => {
-        console.log("here add to the user's bookList")
-        let temp = [...user.bookList];
-        temp = [...temp, book_id];
-        dispatch( updateUserThunk({ ...user, //,
-                                      bookList: temp
-                                  }));// currentUser.bookList.push(book_id) }));
-        console.log('end of addBookmark method');
-        getCurrentUser();
-    };
-
-    const removeBookmark = async (book_id) => {
-        console.log("removing book from user's booklist")
-        dispatch( updateUserThunk({ ...user,
-                                      bookList: user.bookList.filter((id) => id !== book_id)}));
-        getCurrentUser();
-    };
-
-    return (
-        (!loading && book.id && (
-        <li className="list-group-item bg-light-orange p-2">
-            <div className="row">
-                <div className="col-2 d-none d-lg-block">
-                    <img className="img-fluid" src={bookInfo.imageLinks && bookInfo.imageLinks.thumbnail} alt="book image preview"></img>
-                </div>
-                <div className="col-7 fs-7 fw-light" style={{fontSize: 12}}>
-                    <Link to={`/book-details/${book.id}`}>{bookInfo.title}</Link>
-                </div>
-                <div className="col-3">
-                    {/*<i className="fa fa-bookmark"></i>*/}
-                    { (user && (user.bookList.includes(book.id)) &&
-                       ( <i className="bi bi-bookmark-fill"
-                            onClick={ () => removeBookmark(book.id) }></i> ))
-                    }
-                    { (user && !(user.bookList.includes(book.id)) && (
-                        <i className="bi bi-bookmark"
-                           onClick={ () => addBookmark(book.id) }></i> ))
-                    }
-                    {/*{ !user && (<h6>no one</h6>) }*/}
-                </div>
-            </div>
-        </li>
-        ))
-        ||
-        (<li className="list-group-item bg-light-orange">Loading...</li>) // loading &&
-    )
-}
+  return (
+    <li className="list-group-item bg-light-orange p-2">
+      {console.log('infinite rerender in reduced flag')}
+      {loading && <li className="list-group-item bg-light-orange">Loading...</li>}
+      {!loading && book.id && (
+        <div className="row">
+          <div className="col-2 d-none d-lg-block">
+            <img
+              className="img-fluid"
+              src={bookInfo.imageLinks && bookInfo.imageLinks.thumbnail}
+              alt="book image preview"
+            ></img>
+          </div>
+          <div className="col-7 fs-7 fw-light" style={{ fontSize: 12 }}>
+            <Link to={`/book-details/${book.id}`}>{bookInfo.title}</Link>
+          </div>
+          <div className="col-3">
+            {user && user.bookList.includes(book.id) && (
+              <i className="bi bi-bookmark-fill" onClick={() => removeBookmarkHandler}></i>
+            )}
+            {user && !user.bookList.includes(book.id) && (
+              <i className="bi bi-bookmark" onClick={() => addBookmarkHandler}></i>
+            )}
+          </div>
+        </div>
+      )}
+    </li>
+  );
+};
 
 export default BookReducedPreview;

@@ -1,14 +1,6 @@
 import BookPreview from "./book-preview";
-import {useEffect} from "react";
-const BookList = ({ books }) => {
-    // console.log("this is bookParam")
-    // console.log(bookParam)
-    // const books = bookParam.bookParam;
-    // console.log("bookParam.bookParam");
-    // console.log(books)
-    useEffect(() => {
 
-    }, [])
+const BookList = ({ books }) => {
     return (
         <ul className="list-group">
             <li className="list-group-item bg-light-green p-2 border-white rounded">

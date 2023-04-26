@@ -12,7 +12,6 @@ import { Routes, Route } from 'react-router';
 import { Provider } from 'react-redux';
 import CurrentUserContext from './redux/current-user-context';
 import store from './redux/store';
-import SavedBooks from './saved-books';
 import UsersSearch from './search/users-search';
 import Register from "./create-profile";
 
@@ -29,7 +28,6 @@ function App() {
               <Route path="/search/:query" element={<Search />} />
               <Route path="search/users" element={<UsersSearch />} />
               <Route path="search/users/:query" element={<UsersSearch />} />
-              {/*<Route path="/saved-books" element={<SavedBooks />} />*/}
               <Route path="/book-details/:id" element={<BookDetails />} />
               <Route path="/book-clubs" element={<BookGroup />} />
               <Route path="/book-clubs/create" element={<CreateBookClub />} />
