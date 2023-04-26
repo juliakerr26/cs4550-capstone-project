@@ -14,6 +14,7 @@ import CurrentUserContext from './redux/current-user-context';
 import store from './redux/store';
 import UsersSearch from './search/users-search';
 import Register from "./create-profile";
+import EditProfile from "./create-profile/edit-profile";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
               <Route path="/profile/:username" element={<Profile />} />
               <Route path="/login" element={<Login />} />
               <Route path="/create-profile" element={<Register />} />
+              <Route path="/profile/edit" element={<EditProfile />} />
             </Routes>
           </div>
         </BrowserRouter>

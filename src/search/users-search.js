@@ -24,6 +24,14 @@ const UsersSearch = () => {
     dispatch(searchUserByUsernameThunk(usernameSearch));
   };
 
+  const search = async () => {
+    navigate('../search');
+  };
+
+  const users = async () => {
+    navigate('/search/users');
+  }
+
   useEffect(() => {
     if (query) {
       setUsernameSearch(query);
@@ -36,12 +44,12 @@ const UsersSearch = () => {
       <h3 className="d-inline-block txt-dark-orange ps-2 pt-3">Search for Books</h3>
       <ul className="nav nav-tabs">
       <li className="nav-item">
-          <a className="nav-link txt-dark-orange" href="/search">
+          <a className="nav-link txt-dark-orange" onClick={search}>
             Search
           </a>
         </li>
         <li className="nav-item">
-          <a className="nav-link active" href="/search/users">
+          <a className="nav-link active" onClick={users}>
             Users
           </a>
         </li>
@@ -66,7 +74,8 @@ const UsersSearch = () => {
         {!searchTriggered && (
           <h5 className={'m-2 fw-light fst-italic txt-dark-green'}>Enter a search to view users!</h5>
         )}
-        {!!returnedUsers.length &&
+        {returnedUsers &&
+          !!returnedUsers.length &&
           searchTriggered &&
           returnedUsers
             .filter(user => (currentUser ? currentUser._id !== user._id : true))

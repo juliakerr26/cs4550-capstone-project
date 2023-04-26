@@ -20,6 +20,14 @@ const Search = () => {
     setResults(searchResults);
   };
 
+  const search = async () => {
+    navigate('../search');
+  };
+
+  const users = async () => {
+    navigate('/search/users');
+  }
+
   useEffect(() => {
     if (query) {
       setQuery(query);
@@ -32,12 +40,12 @@ const Search = () => {
       <h3 className="d-inline-block txt-dark-orange ps-2 pt-3">Search for Books</h3>
       <ul className="nav nav-tabs">
         <li className="nav-item">
-          <a className="nav-link active" href="/search">
+          <a className="nav-link active" onClick={search}>
             Search
           </a>
         </li>
         <li className="nav-item">
-          <a className="nav-link txt-dark-orange" href="/search/users">
+          <a className="nav-link txt-dark-orange" onClick={users}>
             Users
           </a>
         </li>
