@@ -91,7 +91,7 @@ const UsersSearch = () => {
               </li>
             ))}
         {returnedUsers &&
-          !!returnedUsers.length &&
+          !returnedUsers.length &&
           searchTriggered &&
           !returnedUsers.filter(user => (currentUser ? currentUser._id !== user._id : true)).length && (
             <li className="list-group-item col-8">No users match your search.</li>
