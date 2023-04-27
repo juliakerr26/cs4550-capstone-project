@@ -80,17 +80,17 @@ const CreateBookClub = () => {
     if (id) {
       dispatch(findBookClubByIdThunk(id));
     }
-  });
+  }, []);
 
   useEffect(() => {
     if (id && existingClub.name) {
       setBookClubName(existingClub.name);
 
       const memberObjects = [];
-      existingClub.members.map(id => fetchMembers(id, memberObjects))
+      existingClub.members.map(id => fetchMembers(id, memberObjects));
 
       const bookListObjects = [];
-      existingClub.bookList.map(id => fetchBook(id, bookListObjects))
+      existingClub.bookList.map(id => fetchBook(id, bookListObjects));
     }
   }, [existingClub]);
 
@@ -165,7 +165,9 @@ const CreateBookClub = () => {
                 </button>
               </div>
             </li>
-            {userSearchTriggered && !loading && !!returnedUsers.length &&
+            {userSearchTriggered &&
+              !loading &&
+              !!returnedUsers.length &&
               returnedUsers
                 .filter(
                   user => !bookClubMembers.some(member => member._id === user._id) && user._id !== currentUser._id
@@ -185,7 +187,15 @@ const CreateBookClub = () => {
                       <p className="fw-light fst-italic">{user.username}</p>
                     </li>
                   );
-                })}
+                })}{' '}
+            {((userSearchTriggered &&
+              !loading &&
+              !returnedUsers.filter(
+                user => !bookClubMembers.some(member => member._id === user._id) && user._id !== currentUser._id
+              ).length) ||
+              (userSearchTriggered && !loading && !returnedUsers.length)) && (
+              <li className="list-group-item">No usernames match your search</li>
+            )}
           </ul>
         </div>
         <div className="col-6">

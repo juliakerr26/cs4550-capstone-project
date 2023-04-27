@@ -31,7 +31,7 @@ const BookGroup = () => {
       )}
       <ul className="list-group">
         {loading && <li className="list-group-item">Loading...</li>}
-        {!clubsToRender.length ? (
+        {!loading && !clubsToRender.length ? (
           isAdmin ? (
             <h5 className="txt-dark-green ps-2 pt-3">You have not created any Book Clubs!</h5>
           ) : (
