@@ -90,7 +90,8 @@ const UsersSearch = () => {
                 <p className="fw-light fst-italic">{user.username}</p>
               </li>
             ))}
-        {!!returnedUsers.length &&
+        {returnedUsers &&
+          !!returnedUsers.length &&
           searchTriggered &&
           !returnedUsers.filter(user => (currentUser ? currentUser._id !== user._id : true)).length && (
             <li className="list-group-item col-8">No users match your search.</li>
